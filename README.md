@@ -138,6 +138,16 @@ You'll be walked through the 7 steps. At the two gates, tap the Telegram button
 
 ---
 
+## Run it from n8n (instead of the CLI)
+
+Prefer to drive this from **n8n** with the approval gates as Telegram buttons?
+See [`n8n/README.md`](n8n/README.md). Because n8n Cloud has no shell, n8n acts as
+the control panel (approvals + notifications) and calls a small HTTP wrapper
+(`render_service.py`) that runs these same modules. Import
+[`n8n/quiet-hours-pipeline.n8n.json`](n8n/quiet-hours-pipeline.n8n.json).
+
+---
+
 ## The approval gates (why they're safe)
 
 - **Gate 1 (after the script):** requires `approve`. `reject` stops the run.
