@@ -3,13 +3,13 @@
   "nodes": [
     {
       "parameters": {},
-      "id": "02f8cf11cf3946719b97bda9",
+      "id": "7f9fbafa674248bfb1c4e164",
       "name": "Start",
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
         0,
-        300
+        320
       ]
     },
     {
@@ -17,56 +17,61 @@
         "assignments": {
           "assignments": [
             {
-              "id": "a7d8cb2510184fc4800f0469",
+              "id": "47b6ad4c8d824ae78a1102e5",
+              "name": "botBase",
+              "value": "https://api.telegram.org/bot<YOUR_TELEGRAM_BOT_TOKEN>",
+              "type": "string"
+            },
+            {
+              "id": "7815748bf3b1423fbe7fdf7d",
+              "name": "chatId",
+              "value": "<YOUR_TELEGRAM_CHAT_ID>",
+              "type": "string"
+            },
+            {
+              "id": "532498e6211e4d4bbcf6f8fa",
               "name": "baseUrl",
               "value": "https://YOUR-PUBLIC-SERVICE-URL",
               "type": "string"
             },
             {
-              "id": "59a656478a5048f1866a0f76",
+              "id": "6e6da420e2974ff187772bda",
               "name": "apiToken",
               "value": "YOUR_RENDER_API_TOKEN",
-              "type": "string"
-            },
-            {
-              "id": "fbd393c71944478c98a45324",
-              "name": "chatId",
-              "value": "YOUR_TELEGRAM_CHAT_ID",
               "type": "string"
             }
           ]
         },
         "options": {}
       },
-      "id": "a072f53a533b4cb5a3ce6188",
+      "id": "b41097ff833543798caf9e11",
       "name": "Config",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
         220,
-        300
+        320
       ]
     },
     {
       "parameters": {
-        "chatId": "={{ $('Config').item.json.chatId }}",
-        "text": "🟢 Quiet Hours pipeline started — generating ideas…",
-        "additionalFields": {}
+        "method": "POST",
+        "url": "={{ $('Config').item.json.botBase }}/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"chat_id\": $('Config').item.json.chatId, \"text\": '🟢 Quiet Hours pipeline started — generating ideas…' } }}",
+        "options": {
+          "timeout": 30000
+        }
       },
-      "id": "2ee05e6bd54a458c95bdc486",
-      "name": "Start Notice",
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.2,
+      "id": "6833f4b1856c43ceafe9883f",
+      "name": "Notify Start",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
       "position": [
         440,
-        300
-      ],
-      "credentials": {
-        "telegramApi": {
-          "id": "REPLACE_WITH_YOUR_TELEGRAM_CREDENTIAL",
-          "name": "Telegram account"
-        }
-      }
+        320
+      ]
     },
     {
       "parameters": {
@@ -86,70 +91,60 @@
           "timeout": 1800000
         }
       },
-      "id": "344c054a2a6e4f92bcece0de",
+      "id": "2a6e928d6d4344f08b6d7a3a",
       "name": "Get Ideas",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
         660,
-        300
+        320
       ]
     },
     {
       "parameters": {
-        "chatId": "={{ $('Config').item.json.chatId }}",
-        "text": "={{ '💡 Pick a video idea:\\n\\n' + ($json.ideas||[]).map((x,i)=>(i+1)+'. '+x.title+' — '+x.concept).join('\\n') }}",
-        "additionalFields": {}
+        "method": "POST",
+        "url": "={{ $('Config').item.json.botBase }}/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"chat_id\": $('Config').item.json.chatId, \"text\": \"💡 Pick a video idea:\\n\\n\" + ($json.ideas||[]).map((x,i)=>(i+1)+\". \"+x.title+\" — \"+x.concept).join(\"\\n\"), \"reply_markup\": { \"inline_keyboard\": [ ($json.ideas||[]).map((x,i)=>({ \"text\": String(i+1), \"url\": $execution.resumeUrl + \"?pick=\" + (i+1) })) ] } } }}",
+        "options": {
+          "timeout": 30000
+        }
       },
-      "id": "65fbd6c085ce4cdfacb07742",
-      "name": "Send Ideas",
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.2,
+      "id": "937f7345823e40639b4316af",
+      "name": "Ask Pick",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
       "position": [
         880,
-        300
-      ],
-      "credentials": {
-        "telegramApi": {
-          "id": "REPLACE_WITH_YOUR_TELEGRAM_CREDENTIAL",
-          "name": "Telegram account"
-        }
-      }
+        320
+      ]
     },
     {
       "parameters": {
-        "operation": "sendAndWait",
-        "chatId": "={{ $('Config').item.json.chatId }}",
-        "message": "Reply with the number of the idea you want (1-8).",
-        "responseType": "freeText",
+        "resume": "webhook",
         "options": {}
       },
-      "id": "6186c8c764404727bdd7f12f",
-      "name": "Pick Idea",
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.2,
+      "id": "04525018315e4519a3cfbfc3",
+      "name": "Wait Pick",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
       "position": [
         1100,
-        300
-      ],
-      "credentials": {
-        "telegramApi": {
-          "id": "REPLACE_WITH_YOUR_TELEGRAM_CREDENTIAL",
-          "name": "Telegram account"
-        }
-      }
+        320
+      ]
     },
     {
       "parameters": {
-        "jsCode": "const list = $('Get Ideas').first().json.ideas || [];\nconst raw = ($json.data && $json.data.text) ? String($json.data.text) : '1';\nlet n = parseInt(raw.replace(/[^0-9]/g, ''), 10);\nif (!n || n < 1 || n > list.length) n = 1;\nreturn [{ json: { pick: n, idea: list[n - 1] } }];"
+        "jsCode": "const j = $json || {};\nconst src = j.query || j.body || j.params || j;\nconst list = $('Get Ideas').first().json.ideas || [];\nlet n = parseInt(src.pick, 10);\nif (!n || n < 1 || n > list.length) n = 1;\nreturn [{ json: { pick: n, idea: list[n - 1] } }];"
       },
-      "id": "801794147d00405eb0e10545",
+      "id": "2ce4f7784c4d4faab229b157",
       "name": "Parse Pick",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
         1320,
-        300
+        320
       ]
     },
     {
@@ -172,65 +167,81 @@
         "specifyBody": "json",
         "jsonBody": "={{ { \"idea\": $json.idea } }}"
       },
-      "id": "1dab44f564884fe4964e7d55",
+      "id": "1a47f520c2c7469cb38a8d5b",
       "name": "Get Script",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
         1540,
-        300
+        320
       ]
     },
     {
       "parameters": {
-        "chatId": "={{ $('Config').item.json.chatId }}",
-        "text": "={{ '📝 ' + $json.title + '\\n\\n' + $json.preview + '\\n\\n🎵 ' + $json.music_style }}",
-        "additionalFields": {}
+        "method": "POST",
+        "url": "={{ $('Config').item.json.botBase }}/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"chat_id\": $('Config').item.json.chatId, \"text\": '📝 ' + $json.title + '\\n\\n' + $json.preview + '\\n\\n🎵 ' + $json.music_style } }}",
+        "options": {
+          "timeout": 30000
+        }
       },
-      "id": "4a5ca1bc51064db0bf1b2711",
+      "id": "f53acbc1a5a04852abc7d3c6",
       "name": "Send Preview",
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.2,
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
       "position": [
         1760,
-        300
-      ],
-      "credentials": {
-        "telegramApi": {
-          "id": "REPLACE_WITH_YOUR_TELEGRAM_CREDENTIAL",
-          "name": "Telegram account"
-        }
-      }
+        320
+      ]
     },
     {
       "parameters": {
-        "operation": "sendAndWait",
-        "chatId": "={{ $('Config').item.json.chatId }}",
-        "message": "Approve this script?",
-        "responseType": "approval",
-        "approvalOptions": {
-          "values": {
-            "approvalType": "double",
-            "buttonApprovalText": "approve",
-            "buttonDisapprovalText": "reject"
-          }
-        },
-        "options": {}
+        "method": "POST",
+        "url": "={{ $('Config').item.json.botBase }}/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"chat_id\": $('Config').item.json.chatId, \"text\": \"Approve this script?\", \"reply_markup\": { \"inline_keyboard\": [[ { \"text\": \"✅ approve\", \"url\": $execution.resumeUrl + \"?action=approve\" }, { \"text\": \"❌ reject\", \"url\": $execution.resumeUrl + \"?action=reject\" } ]] } } }}",
+        "options": {
+          "timeout": 30000
+        }
       },
-      "id": "6d5bd1be5dd442ceb73d7980",
-      "name": "Approve Script",
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.2,
+      "id": "7399e2b5f8e549bcb9b98cb8",
+      "name": "Ask Approve",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
       "position": [
         1980,
-        300
-      ],
-      "credentials": {
-        "telegramApi": {
-          "id": "REPLACE_WITH_YOUR_TELEGRAM_CREDENTIAL",
-          "name": "Telegram account"
-        }
-      }
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "resume": "webhook",
+        "options": {}
+      },
+      "id": "c5e0879caada4ce8976673f2",
+      "name": "Wait Approve",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        2200,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const j=$json||{}; const src=j.query||j.body||j.params||j;\nreturn [{ json: { decision: (src.action||'').toString() } }];"
+      },
+      "id": "1b0da2998aae4da18def07b7",
+      "name": "Read Approve",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2420,
+        320
+      ]
     },
     {
       "parameters": {
@@ -241,13 +252,12 @@
           },
           "conditions": [
             {
-              "id": "00c3b9bc2a0f4f9cbf582259",
-              "leftValue": "={{ $json.data.approved }}",
-              "rightValue": "",
+              "id": "16f954355e5b448d8619347e",
+              "leftValue": "={{ $json.decision }}",
+              "rightValue": "approve",
               "operator": {
-                "type": "boolean",
-                "operation": "true",
-                "singleValue": true
+                "type": "string",
+                "operation": "equals"
               }
             }
           ],
@@ -255,35 +265,34 @@
         },
         "options": {}
       },
-      "id": "b39fb426777640dfadb02dc4",
-      "name": "If Approved",
+      "id": "35dd1ac01dd547bc8a1446a9",
+      "name": "If Approve",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        2200,
-        300
+        2640,
+        320
       ]
     },
     {
       "parameters": {
-        "chatId": "={{ $('Config').item.json.chatId }}",
-        "text": "🛑 Script rejected — stopping the run.",
-        "additionalFields": {}
-      },
-      "id": "c691343913834439aa5e22f4",
-      "name": "Rejected",
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.2,
-      "position": [
-        2420,
-        480
-      ],
-      "credentials": {
-        "telegramApi": {
-          "id": "REPLACE_WITH_YOUR_TELEGRAM_CREDENTIAL",
-          "name": "Telegram account"
+        "method": "POST",
+        "url": "={{ $('Config').item.json.botBase }}/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"chat_id\": $('Config').item.json.chatId, \"text\": '🛑 Script rejected — stopping the run.' } }}",
+        "options": {
+          "timeout": 30000
         }
-      }
+      },
+      "id": "665d01a5893e48f0bdaa341a",
+      "name": "Notify Rejected",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2860,
+        520
+      ]
     },
     {
       "parameters": {
@@ -305,35 +314,34 @@
         "specifyBody": "json",
         "jsonBody": "={{ { \"slug\": $('Get Script').item.json.slug } }}"
       },
-      "id": "1294229f7dc44470876eed74",
+      "id": "2f1a3b804cae4e2eae764814",
       "name": "Make Audio",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2420,
+        2860,
         200
       ]
     },
     {
       "parameters": {
-        "chatId": "={{ $('Config').item.json.chatId }}",
-        "text": "✅ Audio done",
-        "additionalFields": {}
-      },
-      "id": "757990c1f0354fd3a4db5abf",
-      "name": "Audio Done",
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.2,
-      "position": [
-        2640,
-        200
-      ],
-      "credentials": {
-        "telegramApi": {
-          "id": "REPLACE_WITH_YOUR_TELEGRAM_CREDENTIAL",
-          "name": "Telegram account"
+        "method": "POST",
+        "url": "={{ $('Config').item.json.botBase }}/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"chat_id\": $('Config').item.json.chatId, \"text\": '✅ Audio done' } }}",
+        "options": {
+          "timeout": 30000
         }
-      }
+      },
+      "id": "9301c7cce74e4cc4ae94272b",
+      "name": "Notify Audio",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3080,
+        200
+      ]
     },
     {
       "parameters": {
@@ -355,35 +363,34 @@
         "specifyBody": "json",
         "jsonBody": "={{ { \"slug\": $('Get Script').item.json.slug } }}"
       },
-      "id": "044b4c12ab5a46898ea82919",
+      "id": "da82c68a5fa0402e955dd360",
       "name": "Make Visuals",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2860,
+        3300,
         200
       ]
     },
     {
       "parameters": {
-        "chatId": "={{ $('Config').item.json.chatId }}",
-        "text": "✅ Visuals done",
-        "additionalFields": {}
-      },
-      "id": "d9c70c29bcff4fa788963bd0",
-      "name": "Visuals Done",
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.2,
-      "position": [
-        3080,
-        200
-      ],
-      "credentials": {
-        "telegramApi": {
-          "id": "REPLACE_WITH_YOUR_TELEGRAM_CREDENTIAL",
-          "name": "Telegram account"
+        "method": "POST",
+        "url": "={{ $('Config').item.json.botBase }}/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"chat_id\": $('Config').item.json.chatId, \"text\": '✅ Visuals done' } }}",
+        "options": {
+          "timeout": 30000
         }
-      }
+      },
+      "id": "4dabc910abde4e4b9c13692a",
+      "name": "Notify Visuals",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3520,
+        200
+      ]
     },
     {
       "parameters": {
@@ -405,90 +412,101 @@
         "specifyBody": "json",
         "jsonBody": "={{ { \"slug\": $('Get Script').item.json.slug } }}"
       },
-      "id": "7ae8b210d0d54ca28784e767",
+      "id": "53c8d0657075494f946313b4",
       "name": "Assemble",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        3300,
+        3740,
         200
       ]
     },
     {
       "parameters": {
-        "chatId": "={{ $('Config').item.json.chatId }}",
-        "text": "✅ Assembled",
-        "additionalFields": {}
-      },
-      "id": "486cfd6cc1a541ef9da2f78e",
-      "name": "Assembled",
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.2,
-      "position": [
-        3520,
-        200
-      ],
-      "credentials": {
-        "telegramApi": {
-          "id": "REPLACE_WITH_YOUR_TELEGRAM_CREDENTIAL",
-          "name": "Telegram account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "sendPhoto",
-        "chatId": "={{ $('Config').item.json.chatId }}",
-        "binaryData": false,
-        "file": "={{ $('Assemble').item.json.thumbnail_url }}",
-        "additionalFields": {
-          "caption": "={{ '🎬 ' + $('Get Script').item.json.title + '\\nWatch / download: ' + $('Assemble').item.json.final_url }}"
+        "method": "POST",
+        "url": "={{ $('Config').item.json.botBase }}/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"chat_id\": $('Config').item.json.chatId, \"text\": '✅ Assembled' } }}",
+        "options": {
+          "timeout": 30000
         }
       },
-      "id": "302911af91064ca1a3c30088",
-      "name": "Send Final",
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.2,
-      "position": [
-        3740,
-        200
-      ],
-      "credentials": {
-        "telegramApi": {
-          "id": "REPLACE_WITH_YOUR_TELEGRAM_CREDENTIAL",
-          "name": "Telegram account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "sendAndWait",
-        "chatId": "={{ $('Config').item.json.chatId }}",
-        "message": "Upload as PRIVATE to YouTube?",
-        "responseType": "approval",
-        "approvalOptions": {
-          "values": {
-            "approvalType": "double",
-            "buttonApprovalText": "upload",
-            "buttonDisapprovalText": "cancel"
-          }
-        },
-        "options": {}
-      },
-      "id": "80d4b6858ab24aa48a529efc",
-      "name": "Approve Upload",
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.2,
+      "id": "77ece323fc464e5fb5e7a61a",
+      "name": "Notify Assembled",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
       "position": [
         3960,
         200
-      ],
-      "credentials": {
-        "telegramApi": {
-          "id": "REPLACE_WITH_YOUR_TELEGRAM_CREDENTIAL",
-          "name": "Telegram account"
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').item.json.botBase }}/sendPhoto",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"chat_id\": $('Config').item.json.chatId, \"photo\": $('Assemble').item.json.thumbnail_url, \"caption\": \"🎬 \" + $('Get Script').item.json.title + \"\\nWatch / download: \" + $('Assemble').item.json.final_url } }}",
+        "options": {
+          "timeout": 30000
         }
-      }
+      },
+      "id": "93caa0d928ce4155ac7087b9",
+      "name": "Send Final",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        4180,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').item.json.botBase }}/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"chat_id\": $('Config').item.json.chatId, \"text\": \"Upload as PRIVATE to YouTube?\", \"reply_markup\": { \"inline_keyboard\": [[ { \"text\": \"📤 upload\", \"url\": $execution.resumeUrl + \"?action=upload\" }, { \"text\": \"❌ cancel\", \"url\": $execution.resumeUrl + \"?action=cancel\" } ]] } } }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "d0e1cdd391244bf7b68d9e4d",
+      "name": "Ask Upload",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        4400,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "resume": "webhook",
+        "options": {}
+      },
+      "id": "6ea4da63b4154b98bbb4b65c",
+      "name": "Wait Upload",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        4620,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const j=$json||{}; const src=j.query||j.body||j.params||j;\nreturn [{ json: { decision: (src.action||'').toString() } }];"
+      },
+      "id": "f4da8544850a4dc895e98ebc",
+      "name": "Read Upload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4840,
+        200
+      ]
     },
     {
       "parameters": {
@@ -499,13 +517,12 @@
           },
           "conditions": [
             {
-              "id": "d9d4f39a109c4e20a5472c0c",
-              "leftValue": "={{ $json.data.approved }}",
-              "rightValue": "",
+              "id": "282978a8a03b4a26a172b639",
+              "leftValue": "={{ $json.decision }}",
+              "rightValue": "upload",
               "operator": {
-                "type": "boolean",
-                "operation": "true",
-                "singleValue": true
+                "type": "string",
+                "operation": "equals"
               }
             }
           ],
@@ -513,35 +530,34 @@
         },
         "options": {}
       },
-      "id": "9f105903f2f5424cabd6f68a",
+      "id": "63134f346d8d45af896f8d71",
       "name": "If Upload",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        4180,
+        5060,
         200
       ]
     },
     {
       "parameters": {
-        "chatId": "={{ $('Config').item.json.chatId }}",
-        "text": "🛑 Upload cancelled. final.mp4 is saved on the server.",
-        "additionalFields": {}
-      },
-      "id": "0d3d4638b5364163a5b9901a",
-      "name": "Cancelled",
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.2,
-      "position": [
-        4400,
-        360
-      ],
-      "credentials": {
-        "telegramApi": {
-          "id": "REPLACE_WITH_YOUR_TELEGRAM_CREDENTIAL",
-          "name": "Telegram account"
+        "method": "POST",
+        "url": "={{ $('Config').item.json.botBase }}/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"chat_id\": $('Config').item.json.chatId, \"text\": '🛑 Upload cancelled. final.mp4 is saved on the server.' } }}",
+        "options": {
+          "timeout": 30000
         }
-      }
+      },
+      "id": "73d9fd9e88b7458a870fb562",
+      "name": "Notify Cancelled",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        5280,
+        360
+      ]
     },
     {
       "parameters": {
@@ -563,67 +579,65 @@
         "specifyBody": "json",
         "jsonBody": "={{ { \"slug\": $('Get Script').item.json.slug } }}"
       },
-      "id": "122d3bcdec05491c92df887f",
+      "id": "5b7f41d1955644498f29ea52",
       "name": "Upload",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        4400,
+        5280,
         120
       ]
     },
     {
       "parameters": {
-        "chatId": "={{ $('Config').item.json.chatId }}",
-        "text": "={{ '📤 Uploaded (private): ' + $json.video_url }}",
-        "additionalFields": {}
-      },
-      "id": "a8f350fcfbee4e928071ed05",
-      "name": "Uploaded",
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.2,
-      "position": [
-        4620,
-        120
-      ],
-      "credentials": {
-        "telegramApi": {
-          "id": "REPLACE_WITH_YOUR_TELEGRAM_CREDENTIAL",
-          "name": "Telegram account"
+        "method": "POST",
+        "url": "={{ $('Config').item.json.botBase }}/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"chat_id\": $('Config').item.json.chatId, \"text\": '📤 Uploaded (private): ' + $json.video_url } }}",
+        "options": {
+          "timeout": 30000
         }
-      }
+      },
+      "id": "25ba63ea82804062a3569baf",
+      "name": "Notify Uploaded",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        5500,
+        120
+      ]
     },
     {
       "parameters": {},
-      "id": "0a022a755aff4267bd2e3648",
+      "id": "0093dad6d9504743bb907913",
       "name": "On Error",
       "type": "n8n-nodes-base.errorTrigger",
       "typeVersion": 1,
       "position": [
         660,
-        620
+        640
       ]
     },
     {
       "parameters": {
-        "chatId": "={{ $('Config').item.json.chatId }}",
-        "text": "={{ '❌ Error in workflow at: ' + ($json.execution && $json.execution.lastNodeExecuted || 'unknown step') }}",
-        "additionalFields": {}
+        "method": "POST",
+        "url": "={{ $('Config').item.json.botBase }}/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"chat_id\": $('Config').item.json.chatId, \"text\": '❌ Error in workflow at: ' + ($json.execution && $json.execution.lastNodeExecuted || 'unknown step') } }}",
+        "options": {
+          "timeout": 30000
+        }
       },
-      "id": "7b125897d448474ab3566f18",
+      "id": "2b489c32a69e4249a4d2210f",
       "name": "Notify Error",
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.2,
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
       "position": [
         880,
-        620
-      ],
-      "credentials": {
-        "telegramApi": {
-          "id": "REPLACE_WITH_YOUR_TELEGRAM_CREDENTIAL",
-          "name": "Telegram account"
-        }
-      }
+        640
+      ]
     }
   ],
   "connections": {
@@ -642,14 +656,14 @@
       "main": [
         [
           {
-            "node": "Start Notice",
+            "node": "Notify Start",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Start Notice": {
+    "Notify Start": {
       "main": [
         [
           {
@@ -664,25 +678,25 @@
       "main": [
         [
           {
-            "node": "Send Ideas",
+            "node": "Ask Pick",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Send Ideas": {
+    "Ask Pick": {
       "main": [
         [
           {
-            "node": "Pick Idea",
+            "node": "Wait Pick",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Pick Idea": {
+    "Wait Pick": {
       "main": [
         [
           {
@@ -719,25 +733,47 @@
       "main": [
         [
           {
-            "node": "Approve Script",
+            "node": "Ask Approve",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Approve Script": {
+    "Ask Approve": {
       "main": [
         [
           {
-            "node": "If Approved",
+            "node": "Wait Approve",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "If Approved": {
+    "Wait Approve": {
+      "main": [
+        [
+          {
+            "node": "Read Approve",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Approve": {
+      "main": [
+        [
+          {
+            "node": "If Approve",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Approve": {
       "main": [
         [
           {
@@ -748,7 +784,7 @@
         ],
         [
           {
-            "node": "Rejected",
+            "node": "Notify Rejected",
             "type": "main",
             "index": 0
           }
@@ -759,16 +795,21 @@
       "main": [
         [
           {
-            "node": "Audio Done",
+            "node": "Notify Audio",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Audio Done": {
+    "Notify Audio": {
       "main": [
         [
+          {
+            "node": "Make Visuals",
+            "type": "main",
+            "index": 0
+          },
           {
             "node": "Make Visuals",
             "type": "main",
@@ -781,14 +822,14 @@
       "main": [
         [
           {
-            "node": "Visuals Done",
+            "node": "Notify Visuals",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Visuals Done": {
+    "Notify Visuals": {
       "main": [
         [
           {
@@ -803,14 +844,14 @@
       "main": [
         [
           {
-            "node": "Assembled",
+            "node": "Notify Assembled",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Assembled": {
+    "Notify Assembled": {
       "main": [
         [
           {
@@ -825,14 +866,36 @@
       "main": [
         [
           {
-            "node": "Approve Upload",
+            "node": "Ask Upload",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Approve Upload": {
+    "Ask Upload": {
+      "main": [
+        [
+          {
+            "node": "Wait Upload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait Upload": {
+      "main": [
+        [
+          {
+            "node": "Read Upload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Upload": {
       "main": [
         [
           {
@@ -854,7 +917,7 @@
         ],
         [
           {
-            "node": "Cancelled",
+            "node": "Notify Cancelled",
             "type": "main",
             "index": 0
           }
@@ -865,7 +928,7 @@
       "main": [
         [
           {
-            "node": "Uploaded",
+            "node": "Notify Uploaded",
             "type": "main",
             "index": 0
           }
