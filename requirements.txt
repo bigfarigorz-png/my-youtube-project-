@@ -1,0 +1,18 @@
+# Quiet Hours Pipeline — Python dependencies.
+# (ffmpeg is a SYSTEM dependency, not a pip package — see README.md → Prerequisites.)
+
+# Anthropic Claude (ideas + script). Use a recent release for claude-opus-4-8 +
+# adaptive thinking; `pip install -U anthropic` is recommended.
+anthropic>=0.40.0
+
+# HTTP for MusicGPT, Segmind/Higgsfield and Telegram REST calls.
+requests>=2.31.0
+
+# Load secrets from .env
+python-dotenv>=1.0.1
+
+# YouTube Data API v3 + OAuth2
+google-api-python-client>=2.100.0
+google-auth>=2.23.0
+google-auth-oauthlib>=1.2.0
+google-auth-httplib2>=0.2.0
