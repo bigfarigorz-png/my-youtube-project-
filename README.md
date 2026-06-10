@@ -20,9 +20,13 @@ Open it anywhere, host it anywhere.
 **https://bigfarigorz-png.github.io/my-youtube-project-/**
 
 Deployment is automatic: every push to `main` (or the current working branch) runs
-`.github/workflows/deploy.yml`, which publishes the site to GitHub Pages. No manual
-steps. If the very first run ever fails with a permissions error, enable it once via
-**Settings → Pages → Source: GitHub Actions**, then re-run the workflow.
+`.github/workflows/deploy.yml`, which publishes the site to GitHub Pages.
+
+> **One-time prerequisite:** GitHub Pages on a free plan requires a **public**
+> repository. Make the repo public via **Settings → General → Danger Zone →
+> Change visibility**, then re-run the failed *"Deploy portfolio to GitHub Pages"*
+> workflow from the **Actions** tab (or just push any commit). After that, every
+> push deploys automatically.
 
 ### Run locally
 
