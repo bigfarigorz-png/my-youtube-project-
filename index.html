@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Atelier March — Architecture &amp; Spatial Design</title>
+  <meta name="description" content="Atelier March is the studio of architect Alina March — crafting quiet, light-driven buildings and interiors across Europe." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%231a1a18'/%3E%3Cpath d='M25 78 L50 22 L75 78 L63 78 L50 47 L37 78 Z' fill='%23f4f1ec'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Preloader -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader__inner">
+      <span class="preloader__word">Atelier</span>
+      <span class="preloader__word preloader__word--italic">March</span>
+    </div>
+    <span class="preloader__counter" id="preloaderCounter">0</span>
+  </div>
+
+  <!-- Custom cursor -->
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <a class="header__logo" href="#top" aria-label="Atelier March — home">
+      <span class="header__logo-mark">A—M</span>
+      <span class="header__logo-text">Atelier March</span>
+    </a>
+    <nav class="header__nav" aria-label="Primary">
+      <a href="#studio" data-cursor>Studio</a>
+      <a href="#works" data-cursor>Works</a>
+      <a href="#practice" data-cursor>Practice</a>
+      <a href="#contact" data-cursor>Contact</a>
+    </nav>
+    <a class="header__cta" href="#contact" data-cursor>Start a project</a>
+    <button class="header__burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <nav class="mobile-menu__nav" aria-label="Mobile">
+      <a href="#studio"><em>01</em> Studio</a>
+      <a href="#works"><em>02</em> Works</a>
+      <a href="#practice"><em>03</em> Practice</a>
+      <a href="#contact"><em>04</em> Contact</a>
+    </nav>
+    <div class="mobile-menu__foot">
+      <a href="mailto:studio@ateliermarch.com">studio@ateliermarch.com</a>
+      <span>Lisbon, Portugal</span>
+    </div>
+  </div>
+
+  <main id="top">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <figure class="hero__media" id="heroMedia">
+        <img
+          src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=2200&q=80"
+          alt="White concrete building under daylight, strong geometric shadows"
+          fetchpriority="high" />
+      </figure>
+      <div class="hero__overlay"></div>
+
+      <div class="hero__top reveal">
+        <span>Architecture · Interiors · Urbanism</span>
+        <span>Lisbon — Est. 2012</span>
+      </div>
+
+      <div class="hero__content">
+        <h1 class="hero__title">
+          <span class="hero__line"><span>Form follows</span></span>
+          <span class="hero__line hero__line--italic"><span>feeling.</span></span>
+        </h1>
+        <p class="hero__sub reveal">
+          Atelier March is the practice of architect <strong>Alina March</strong> —
+          crafting quiet, light-driven buildings and interiors across Europe.
+        </p>
+      </div>
+
+      <div class="hero__bottom">
+        <a class="hero__scroll" href="#studio" data-cursor>
+          <span class="hero__scroll-line"></span>
+          <span>Scroll to explore</span>
+        </a>
+        <span class="hero__index">Featured — National Museum of Light, 2023</span>
+      </div>
+    </section>
+
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Residential — Cultural — Adaptive Reuse — Interiors — Urban Design — Landscape — </span>
+        <span>Residential — Cultural — Adaptive Reuse — Interiors — Urban Design — Landscape — </span>
+      </div>
+    </div>
+
+    <!-- ============ STUDIO / ABOUT ============ -->
+    <section class="studio section" id="studio">
+      <div class="section__head reveal">
+        <span class="section__num">01</span>
+        <span class="section__label">Studio</span>
+      </div>
+
+      <h2 class="studio__statement reveal">
+        We believe architecture is the slowest art —
+        <em>buildings that hold light,</em> frame silence,
+        and age with grace.
+      </h2>
+
+      <div class="studio__grid">
+        <figure class="studio__media reveal" data-cursor-label="The studio">
+          <img
+            src="https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?auto=format&fit=crop&w=1400&q=80"
+            alt="Low-angle view of a modern building facade" loading="lazy" decoding="async" />
+        </figure>
+        <div class="studio__text">
+          <p class="reveal">
+            Founded in Lisbon in 2012, the studio works between architecture, interiors and
+            urban strategy. Every commission begins the same way: with the site, the light,
+            and the people who will live inside the work.
+          </p>
+          <p class="reveal">
+            From a clifftop house in the Algarve to a museum carved into a former power
+            station, our projects share one ambition — clarity. Few materials, precise
+            details, generous daylight.
+          </p>
+          <a class="link-arrow reveal" href="#works" data-cursor>Explore selected works</a>
+        </div>
+      </div>
+
+      <div class="stats reveal">
+        <div class="stats__item">
+          <span class="stats__value"><span data-count="12">0</span>+</span>
+          <span class="stats__label">Years of practice</span>
+        </div>
+        <div class="stats__item">
+          <span class="stats__value"><span data-count="87">0</span></span>
+          <span class="stats__label">Built projects</span>
+        </div>
+        <div class="stats__item">
+          <span class="stats__value"><span data-count="14">0</span></span>
+          <span class="stats__label">Design awards</span>
+        </div>
+        <div class="stats__item">
+          <span class="stats__value"><span data-count="6">0</span></span>
+          <span class="stats__label">Countries</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WORKS ============ -->
+    <section class="works section" id="works">
+      <div class="section__head reveal">
+        <span class="section__num">02</span>
+        <span class="section__label">Selected works</span>
+      </div>
+
+      <div class="works__bar reveal">
+        <h2 class="works__title">Buildings, interiors<br /><em>&amp; everything between.</em></h2>
+        <div class="filters" role="group" aria-label="Filter projects">
+          <button class="filter is-active" data-filter="all" data-cursor>All</button>
+          <button class="filter" data-filter="residential" data-cursor>Residential</button>
+          <button class="filter" data-filter="cultural" data-cursor>Cultural</button>
+          <button class="filter" data-filter="commercial" data-cursor>Commercial</button>
+          <button class="filter" data-filter="interior" data-cursor>Interior</button>
+        </div>
+      </div>
+
+      <div class="works__grid" id="worksGrid">
+
+        <article class="project reveal" data-category="residential"
+          data-title="Casa Alvor"
+          data-location="Algarve, Portugal"
+          data-year="2024"
+          data-area="420 m²"
+          data-role="Architecture &amp; Interiors"
+          data-desc="A clifftop family house resolved as two stacked concrete trays. Deep overhangs shade the glazing; every room frames the Atlantic. The palette — board-marked concrete, travertine, pale oak — was chosen to bleach softly in the salt air.">
+          <figure class="project__media" data-cursor-label="View project">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=80"
+              alt="Modern white residential house with large glazing at dusk" loading="lazy" decoding="async" />
+          </figure>
+          <div class="project__meta">
+            <span class="project__index">/01</span>
+            <h3 class="project__name">Casa Alvor</h3>
+            <p class="project__tags">Residential — Algarve, PT — 2024</p>
+          </div>
+        </article>
+
+        <article class="project reveal" data-category="cultural"
+          data-title="Museu da Luz"
+          data-location="Porto, Portugal"
+          data-year="2023"
+          data-area="6,800 m²"
+          data-role="Architecture, competition 1st prize"
+          data-desc="A museum of light carved into a decommissioned power station. A single sculptural ribbon of white concrete guides visitors from the turbine hall to a rooftop oculus, where the building's only exhibit at noon is the sun itself.">
+          <figure class="project__media" data-cursor-label="View project">
+            <img src="https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&w=1400&q=80"
+              alt="Sweeping white curved facade of a cultural building" loading="lazy" decoding="async" />
+          </figure>
+          <div class="project__meta">
+            <span class="project__index">/02</span>
+            <h3 class="project__name">Museu da Luz</h3>
+            <p class="project__tags">Cultural — Porto, PT — 2023</p>
+          </div>
+        </article>
+
+        <article class="project reveal" data-category="commercial"
+          data-title="Meridian Tower"
+          data-location="Rotterdam, Netherlands"
+          data-year="2022"
+          data-area="24,000 m²"
+          data-role="Architecture &amp; facade design"
+          data-desc="A 22-storey workplace tower wrapped in a double-skin glass facade that ventilates itself. The plan is a simple offset core; the section is not — three-storey garden voids spiral up the building, giving every floor a forest view.">
+          <figure class="project__media" data-cursor-label="View project">
+            <img src="https://images.unsplash.com/photo-1431576901776-e539bd916ba2?auto=format&fit=crop&w=1400&q=80"
+              alt="Glass office tower reflecting the sky" loading="lazy" decoding="async" />
+          </figure>
+          <div class="project__meta">
+            <span class="project__index">/03</span>
+            <h3 class="project__name">Meridian Tower</h3>
+            <p class="project__tags">Commercial — Rotterdam, NL — 2022</p>
+          </div>
+        </article>
+
+        <article class="project reveal" data-category="interior"
+          data-title="Apartment Aurora"
+          data-location="Lisbon, Portugal"
+          data-year="2024"
+          data-area="180 m²"
+          data-role="Interior architecture"
+          data-desc="A full reinvention of a Pombaline apartment for a photographer. Partitions were replaced by two oak 'furniture walls' that hold the kitchen, library and hidden doors — leaving the original vaulted ceilings to do the talking.">
+          <figure class="project__media" data-cursor-label="View project">
+            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=80"
+              alt="Bright minimalist living room interior with warm wood" loading="lazy" decoding="async" />
+          </figure>
+          <div class="project__meta">
+            <span class="project__index">/04</span>
+            <h3 class="project__name">Apartment Aurora</h3>
+            <p class="project__tags">Interior — Lisbon, PT — 2024</p>
+          </div>
+        </article>
+
+        <article class="project reveal" data-category="residential"
+          data-title="Villa Horizonte"
+          data-location="Mallorca, Spain"
+          data-year="2021"
+          data-area="560 m²"
+          data-role="Architecture, interiors &amp; landscape"
+          data-desc="A single horizontal gesture on a terraced olive grove. The house is one long room deep, so every space opens to the pool terrace on one side and the grove on the other. The infinity edge aligns exactly with the sea horizon.">
+          <figure class="project__media" data-cursor-label="View project">
+            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1400&q=80"
+              alt="Contemporary villa with infinity pool at dusk" loading="lazy" decoding="async" />
+          </figure>
+          <div class="project__meta">
+            <span class="project__index">/05</span>
+            <h3 class="project__name">Villa Horizonte</h3>
+            <p class="project__tags">Residential — Mallorca, ES — 2021</p>
+          </div>
+        </article>
+
+        <article class="project reveal" data-category="cultural"
+          data-title="Pavilion of Stillness"
+          data-location="Venice, Italy"
+          data-year="2023"
+          data-area="340 m²"
+          data-role="Architecture — Biennale installation"
+          data-desc="A temporary pavilion for the Venice Architecture Biennale: a white spiral ramp around an empty centre. Visitors ascend in silence; the only program is the slow change of light. Dismantled and rebuilt as a reading room in Treviso.">
+          <figure class="project__media" data-cursor-label="View project">
+            <img src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1400&q=80"
+              alt="White spiral concrete structure with soft daylight" loading="lazy" decoding="async" />
+          </figure>
+          <div class="project__meta">
+            <span class="project__index">/06</span>
+            <h3 class="project__name">Pavilion of Stillness</h3>
+            <p class="project__tags">Cultural — Venice, IT — 2023</p>
+          </div>
+        </article>
+
+        <article class="project reveal" data-category="commercial"
+          data-title="Cortile Offices"
+          data-location="Milan, Italy"
+          data-year="2020"
+          data-area="9,200 m²"
+          data-role="Architecture &amp; workplace strategy"
+          data-desc="An adaptive reuse of a 1950s printing house around a planted courtyard. New ribbed-concrete galleries wrap the cortile, and the old press hall became a public café — returning the block to the neighbourhood after sixty closed years.">
+          <figure class="project__media" data-cursor-label="View project">
+            <img src="https://images.unsplash.com/photo-1486718448742-163732cd1544?auto=format&fit=crop&w=1400&q=80"
+              alt="Rhythmic concrete facade detail in warm light" loading="lazy" decoding="async" />
+          </figure>
+          <div class="project__meta">
+            <span class="project__index">/07</span>
+            <h3 class="project__name">Cortile Offices</h3>
+            <p class="project__tags">Commercial — Milan, IT — 2020</p>
+          </div>
+        </article>
+
+        <article class="project reveal" data-category="interior"
+          data-title="Loft Brutal"
+          data-location="Berlin, Germany"
+          data-year="2022"
+          data-area="240 m²"
+          data-role="Interior architecture"
+          data-desc="A raw concrete loft in a converted Plattenbau depot, softened with lime plaster, steel and bouclé. A folded blackened-steel stair — the only new 'object' — links the living hall to a sleeping mezzanine under the sawtooth roof.">
+          <figure class="project__media" data-cursor-label="View project">
+            <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1400&q=80"
+              alt="Minimal interior with sculptural staircase" loading="lazy" decoding="async" />
+          </figure>
+          <div class="project__meta">
+            <span class="project__index">/08</span>
+            <h3 class="project__name">Loft Brutal</h3>
+            <p class="project__tags">Interior — Berlin, DE — 2022</p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ============ QUOTE BAND ============ -->
+    <section class="quote">
+      <figure class="quote__media">
+        <img src="https://images.unsplash.com/photo-1488972685288-c3fd157d7c7a?auto=format&fit=crop&w=2000&q=80"
+          alt="White arched colonnade in strong light" loading="lazy" decoding="async" />
+      </figure>
+      <blockquote class="quote__text reveal">
+        “We don't decorate space — we orchestrate
+        <em>light, mass and silence.</em>”
+        <cite>— Alina March</cite>
+      </blockquote>
+    </section>
+
+    <!-- ============ PRACTICE / SERVICES ============ -->
+    <section class="practice section" id="practice">
+      <div class="section__head reveal">
+        <span class="section__num">03</span>
+        <span class="section__label">Practice</span>
+      </div>
+
+      <h2 class="practice__title reveal">From first sketch<br /><em>to final handle.</em></h2>
+
+      <ul class="services">
+        <li class="service reveal" data-cursor>
+          <span class="service__num">01</span>
+          <div class="service__body">
+            <h3>Concept &amp; Feasibility</h3>
+            <p>Site analysis, massing studies, planning strategy and the early sketches that decide everything. We test ideas fast — in card, clay and daylight models.</p>
+          </div>
+          <span class="service__arrow" aria-hidden="true">→</span>
+        </li>
+        <li class="service reveal" data-cursor>
+          <span class="service__num">02</span>
+          <div class="service__body">
+            <h3>Architecture &amp; Planning</h3>
+            <p>Full architectural service from permit to site supervision. Drawings precise enough to price, details considered enough to last a century.</p>
+          </div>
+          <span class="service__arrow" aria-hidden="true">→</span>
+        </li>
+        <li class="service reveal" data-cursor>
+          <span class="service__num">03</span>
+          <div class="service__body">
+            <h3>Interior Architecture</h3>
+            <p>Interiors designed as buildings in miniature — joinery, lighting, stone and textile composed with the same rigour as structure.</p>
+          </div>
+          <span class="service__arrow" aria-hidden="true">→</span>
+        </li>
+        <li class="service reveal" data-cursor>
+          <span class="service__num">04</span>
+          <div class="service__body">
+            <h3>Landscape &amp; Urbanism</h3>
+            <p>Masterplans, courtyards and gardens that treat open space as the most important room of all.</p>
+          </div>
+          <span class="service__arrow" aria-hidden="true">→</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ============ RECOGNITION ============ -->
+    <section class="awards section">
+      <div class="section__head reveal">
+        <span class="section__num">04</span>
+        <span class="section__label">Recognition</span>
+      </div>
+      <ul class="awards__list">
+        <li class="awards__row reveal">
+          <span class="awards__year">2024</span>
+          <span class="awards__name">EU Mies Award — Shortlist</span>
+          <span class="awards__project">Museu da Luz</span>
+        </li>
+        <li class="awards__row reveal">
+          <span class="awards__year">2023</span>
+          <span class="awards__name">Dezeen Awards — Winner, Civic Building</span>
+          <span class="awards__project">Pavilion of Stillness</span>
+        </li>
+        <li class="awards__row reveal">
+          <span class="awards__year">2022</span>
+          <span class="awards__name">ArchDaily Building of the Year — Finalist</span>
+          <span class="awards__project">Meridian Tower</span>
+        </li>
+        <li class="awards__row reveal">
+          <span class="awards__year">2021</span>
+          <span class="awards__name">RIBA International Prize — Nominee</span>
+          <span class="awards__project">Villa Horizonte</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="contact section" id="contact">
+      <div class="section__head section__head--light reveal">
+        <span class="section__num">05</span>
+        <span class="section__label">Contact</span>
+      </div>
+      <h2 class="contact__title reveal">
+        Let's build something<br /><em>quiet &amp; bold.</em>
+      </h2>
+      <a class="contact__mail reveal" href="mailto:studio@ateliermarch.com" data-cursor>studio@ateliermarch.com</a>
+      <div class="contact__grid reveal">
+        <div>
+          <h4>Studio</h4>
+          <p>Rua das Flores 112<br />1200-195 Lisbon, Portugal</p>
+        </div>
+        <div>
+          <h4>New business</h4>
+          <p>+351 21 555 0142<br />Mon–Fri, 9:00–18:00 WET</p>
+        </div>
+        <div>
+          <h4>Follow</h4>
+          <p>
+            <a href="#" data-cursor>Instagram</a><br />
+            <a href="#" data-cursor>LinkedIn</a>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <span>© 2026 Atelier March — All rights reserved</span>
+    <span class="footer__credit">Architecture &amp; Spatial Design, Lisbon</span>
+    <a href="#top" data-cursor>Back to top ↑</a>
+  </footer>
+
+  <!-- ============ PROJECT MODAL ============ -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal__backdrop" data-close></div>
+    <div class="modal__panel">
+      <button class="modal__close" data-close aria-label="Close project" data-cursor>✕</button>
+      <figure class="modal__media"><img id="modalImg" src="" alt="" /></figure>
+      <div class="modal__body">
+        <p class="modal__kicker" id="modalKicker"></p>
+        <h3 class="modal__title" id="modalTitle"></h3>
+        <p class="modal__desc" id="modalDesc"></p>
+        <dl class="modal__facts">
+          <div><dt>Location</dt><dd id="modalLocation"></dd></div>
+          <div><dt>Year</dt><dd id="modalYear"></dd></div>
+          <div><dt>Area</dt><dd id="modalArea"></dd></div>
+          <div><dt>Scope</dt><dd id="modalRole"></dd></div>
+        </dl>
+        <a class="link-arrow" href="#contact" data-close data-cursor>Commission a similar project</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
