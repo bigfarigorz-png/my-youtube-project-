@@ -287,4 +287,40 @@
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
   });
+
+  /* ----------------------------------------------------------
+     Contact form — submits via FormSubmit's AJAX endpoint so
+     the visitor never leaves the page; falls back to a classic
+     POST if the request can't go through.
+     ---------------------------------------------------------- */
+  const form = document.getElementById("contactForm");
+  const formStatus = document.getElementById("formStatus");
+
+  if (form) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const submitBtn = form.querySelector(".contact-form__submit");
+      submitBtn.disabled = true;
+      formStatus.textContent = "Sending…";
+
+      try {
+        const res = await fetch(
+          form.action.replace("formsubmit.co/", "formsubmit.co/ajax/"),
+          {
+            method: "POST",
+            headers: { Accept: "application/json" },
+            body: new FormData(form),
+          }
+        );
+        if (!res.ok) throw new Error("Request failed");
+        form.reset();
+        formStatus.textContent = "Thank you — your message is on its way.";
+      } catch {
+        // Let the browser do a normal POST instead
+        form.submit();
+        return;
+      }
+      submitBtn.disabled = false;
+    });
+  }
 })();

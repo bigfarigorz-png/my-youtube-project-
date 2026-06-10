@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Atelier March — Architecture &amp; Spatial Design</title>
   <meta name="description" content="Atelier March is the studio of architect Alina March — crafting quiet, light-driven buildings and interiors across Europe." />
+  <meta property="og:title" content="Atelier March — Architecture &amp; Spatial Design" />
+  <meta property="og:description" content="Quiet, light-driven buildings and interiors across Europe." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=1200&q=80" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%231a1a18'/%3E%3Cpath d='M25 78 L50 22 L75 78 L63 78 L50 47 L37 78 Z' fill='%23f4f1ec'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -53,7 +58,7 @@
       <a href="#contact"><em>04</em> Contact</a>
     </nav>
     <div class="mobile-menu__foot">
-      <a href="mailto:studio@ateliermarch.com">studio@ateliermarch.com</a>
+      <a href="mailto:bigfarigorz@gmail.com">bigfarigorz@gmail.com</a>
       <span>Lisbon, Portugal</span>
     </div>
   </div>
@@ -421,7 +426,34 @@
       <h2 class="contact__title reveal">
         Let's build something<br /><em>quiet &amp; bold.</em>
       </h2>
-      <a class="contact__mail reveal" href="mailto:studio@ateliermarch.com" data-cursor>studio@ateliermarch.com</a>
+      <a class="contact__mail reveal" href="mailto:bigfarigorz@gmail.com" data-cursor>bigfarigorz@gmail.com</a>
+
+      <form class="contact-form reveal" id="contactForm"
+        action="https://formsubmit.co/bigfarigorz@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="New project inquiry — portfolio site" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="text" name="_honey" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <div class="contact-form__row">
+          <label class="field">
+            <span>Your name</span>
+            <input type="text" name="name" required autocomplete="name" placeholder="Jane Doe" />
+          </label>
+          <label class="field">
+            <span>Your email</span>
+            <input type="email" name="email" required autocomplete="email" placeholder="jane@example.com" />
+          </label>
+        </div>
+        <label class="field">
+          <span>Tell us about your project</span>
+          <textarea name="message" rows="4" required
+            placeholder="A house on a hill, a gallery, a renovation…"></textarea>
+        </label>
+        <div class="contact-form__foot">
+          <button class="contact-form__submit" type="submit" data-cursor>Send inquiry →</button>
+          <p class="contact-form__status" id="formStatus" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+
       <div class="contact__grid reveal">
         <div>
           <h4>Studio</h4>

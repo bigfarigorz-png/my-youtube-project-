@@ -15,9 +15,18 @@ Open it anywhere, host it anywhere.
 - **Fully responsive** — full-screen mobile menu, adaptive grids
 - **Accessible** — keyboard-navigable gallery and modal (Enter / Esc), `prefers-reduced-motion` support, semantic HTML
 
-## 🚀 View it
+## 🌍 Live site
 
-Just open `index.html` in a browser, or serve it locally:
+**https://bigfarigorz-png.github.io/my-youtube-project-/**
+
+Deployment is automatic: every push to `main` (or the current working branch) runs
+`.github/workflows/deploy.yml`, which publishes the site to GitHub Pages. No manual
+steps. If the very first run ever fails with a permissions error, enable it once via
+**Settings → Pages → Source: GitHub Actions**, then re-run the workflow.
+
+### Run locally
+
+Just open `index.html` in a browser, or serve it:
 
 ```bash
 npx serve .
@@ -25,10 +34,14 @@ npx serve .
 python3 -m http.server 8000
 ```
 
-### Deploy free with GitHub Pages
+## ✉️ Contact form
 
-Repo → **Settings → Pages** → Source: *Deploy from a branch* → pick your branch, folder `/ (root)` → Save.
-Your portfolio goes live at `https://<username>.github.io/<repo>/`.
+The form posts to [FormSubmit](https://formsubmit.co) (free, no signup, no backend)
+and delivers messages to the email in the form's `action` attribute
+(`bigfarigorz@gmail.com`). **One-time activation:** the first submission sends an
+activation link to that inbox — click it once and the form is live. After activating,
+FormSubmit gives you a random alias string you can swap into the `action` URL so your
+raw email isn't exposed in the page source.
 
 ## 🎨 Make it yours
 
@@ -39,6 +52,7 @@ Your portfolio goes live at `https://<username>.github.io/<repo>/`.
 | Photos | Swap the Unsplash `src` URLs for your own images (keep `loading="lazy"`) |
 | Colors | CSS variables at the top of `css/style.css` (`--bg`, `--ink`, `--accent`, …) |
 | Fonts | The Google Fonts `<link>` in `index.html` + `--font-display` / `--font-text` in the CSS |
+| Contact email (mailto + form) | Replace `bigfarigorz@gmail.com` in `index.html` (3 places) |
 | Contact details | The `#contact` section and footer in `index.html` |
 | Stats | `data-count` attributes in the Studio section |
 
