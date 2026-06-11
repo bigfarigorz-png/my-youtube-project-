@@ -323,4 +323,51 @@
       submitBtn.disabled = false;
     });
   }
+
+  /* ----------------------------------------------------------
+     Testimonials slider — auto-advances, pauses on hover,
+     wraps around at the ends.
+     ---------------------------------------------------------- */
+  const track = document.getElementById("testiTrack");
+
+  if (track) {
+    const slides = track.children.length;
+    const nowEl = document.getElementById("testiNow");
+    const totalEl = document.getElementById("testiTotal");
+    let index = 0;
+    let timer = null;
+
+    totalEl.textContent = String(slides).padStart(2, "0");
+
+    function goTo(i) {
+      index = (i + slides) % slides;
+      track.style.transform = `translateX(-${index * 100}%)`;
+      nowEl.textContent = String(index + 1).padStart(2, "0");
+    }
+
+    function startAuto() {
+      if (prefersReducedMotion) return;
+      stopAuto();
+      timer = setInterval(() => goTo(index + 1), 6500);
+    }
+    function stopAuto() {
+      if (timer) clearInterval(timer);
+      timer = null;
+    }
+
+    document.getElementById("testiPrev").addEventListener("click", () => {
+      goTo(index - 1);
+      startAuto();
+    });
+    document.getElementById("testiNext").addEventListener("click", () => {
+      goTo(index + 1);
+      startAuto();
+    });
+
+    const testiSection = document.getElementById("clients");
+    testiSection.addEventListener("mouseenter", stopAuto);
+    testiSection.addEventListener("mouseleave", startAuto);
+
+    startAuto();
+  }
 })();
