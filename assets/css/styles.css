@@ -502,3 +502,16 @@ h1, h2, h3, h4 { font-family: var(--display); font-weight: 600; line-height: 1.0
 }
 @media (max-width: 820px) { .slabgrid { grid-template-columns: repeat(3, 1fr); gap: 10px; } }
 @media (max-width: 560px) { .slabgrid { grid-template-columns: repeat(2, 1fr); gap: 8px; } }
+
+/* ---- Veronzo catalogue gallery ------------------------------------------ */
+.catgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.catgrid a { display: block; border-radius: var(--radius); overflow: hidden; background: #fff; border: 1px solid var(--line); box-shadow: 0 6px 22px rgba(20,20,15,0.06); transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease); }
+.catgrid a:hover { transform: translateY(-4px); box-shadow: 0 14px 34px rgba(20,20,15,0.12); }
+.catgrid img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; display: block; }
+@media (max-width: 820px) { .catgrid { grid-template-columns: repeat(3, 1fr); gap: 12px; } }
+@media (max-width: 560px) { .catgrid { grid-template-columns: repeat(2, 1fr); gap: 10px; } }
+
+/* ---- Stock gallery groups ----------------------------------------------- */
+.gal-head { max-width: 760px; margin-bottom: 22px; }
+.gal-head .h2 { margin: 8px 0 6px; }
+.gal-head .lede { font-size: clamp(1rem, 1.4vw, 1.15rem); }
