@@ -1,0 +1,959 @@
+{
+  "name": "Quiet Hours Pipeline",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "7f9fbafa674248bfb1c4e164",
+      "name": "Start",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "47b6ad4c8d824ae78a1102e5",
+              "name": "botBase",
+              "value": "https://api.telegram.org/bot<YOUR_TELEGRAM_BOT_TOKEN>",
+              "type": "string"
+            },
+            {
+              "id": "7815748bf3b1423fbe7fdf7d",
+              "name": "chatId",
+              "value": "<YOUR_TELEGRAM_CHAT_ID>",
+              "type": "string"
+            },
+            {
+              "id": "532498e6211e4d4bbcf6f8fa",
+              "name": "baseUrl",
+              "value": "https://YOUR-PUBLIC-SERVICE-URL",
+              "type": "string"
+            },
+            {
+              "id": "6e6da420e2974ff187772bda",
+              "name": "apiToken",
+              "value": "YOUR_RENDER_API_TOKEN",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b41097ff833543798caf9e11",
+      "name": "Config",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        220,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').item.json.botBase }}/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"chat_id\": $('Config').item.json.chatId, \"text\": '🟢 Quiet Hours pipeline started — generating ideas…' } }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "6833f4b1856c43ceafe9883f",
+      "name": "Notify Start",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        440,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').item.json.baseUrl }}/ideas",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-Token",
+              "value": "={{ $('Config').item.json.apiToken }}"
+            }
+          ]
+        },
+        "sendBody": false,
+        "options": {
+          "timeout": 1800000
+        }
+      },
+      "id": "2a6e928d6d4344f08b6d7a3a",
+      "name": "Get Ideas",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        660,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').item.json.botBase }}/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"chat_id\": $('Config').item.json.chatId, \"text\": \"💡 Pick a video idea:\\n\\n\" + ($json.ideas||[]).map((x,i)=>(i+1)+\". \"+x.title+\" — \"+x.concept).join(\"\\n\"), \"reply_markup\": { \"inline_keyboard\": [ ($json.ideas||[]).map((x,i)=>({ \"text\": String(i+1), \"url\": $execution.resumeUrl + \"?pick=\" + (i+1) })) ] } } }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "937f7345823e40639b4316af",
+      "name": "Ask Pick",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        880,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "resume": "webhook",
+        "options": {}
+      },
+      "id": "04525018315e4519a3cfbfc3",
+      "name": "Wait Pick",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1100,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const j = $json || {};\nconst src = j.query || j.body || j.params || j;\nconst list = $('Get Ideas').first().json.ideas || [];\nlet n = parseInt(src.pick, 10);\nif (!n || n < 1 || n > list.length) n = 1;\nreturn [{ json: { pick: n, idea: list[n - 1] } }];"
+      },
+      "id": "2ce4f7784c4d4faab229b157",
+      "name": "Parse Pick",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1320,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').item.json.baseUrl }}/script",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-Token",
+              "value": "={{ $('Config').item.json.apiToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "options": {
+          "timeout": 1800000
+        },
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"idea\": $json.idea } }}"
+      },
+      "id": "1a47f520c2c7469cb38a8d5b",
+      "name": "Get Script",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1540,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').item.json.botBase }}/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"chat_id\": $('Config').item.json.chatId, \"text\": '📝 ' + $json.title + '\\n\\n' + $json.preview + '\\n\\n🎵 ' + $json.music_style } }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "f53acbc1a5a04852abc7d3c6",
+      "name": "Send Preview",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1760,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').item.json.botBase }}/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"chat_id\": $('Config').item.json.chatId, \"text\": \"Approve this script?\", \"reply_markup\": { \"inline_keyboard\": [[ { \"text\": \"✅ approve\", \"url\": $execution.resumeUrl + \"?action=approve\" }, { \"text\": \"❌ reject\", \"url\": $execution.resumeUrl + \"?action=reject\" } ]] } } }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "7399e2b5f8e549bcb9b98cb8",
+      "name": "Ask Approve",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1980,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "resume": "webhook",
+        "options": {}
+      },
+      "id": "c5e0879caada4ce8976673f2",
+      "name": "Wait Approve",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        2200,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const j=$json||{}; const src=j.query||j.body||j.params||j;\nreturn [{ json: { decision: (src.action||'').toString() } }];"
+      },
+      "id": "1b0da2998aae4da18def07b7",
+      "name": "Read Approve",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2420,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "16f954355e5b448d8619347e",
+              "leftValue": "={{ $json.decision }}",
+              "rightValue": "approve",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "35dd1ac01dd547bc8a1446a9",
+      "name": "If Approve",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2640,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').item.json.botBase }}/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"chat_id\": $('Config').item.json.chatId, \"text\": '🛑 Script rejected — stopping the run.' } }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "665d01a5893e48f0bdaa341a",
+      "name": "Notify Rejected",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2860,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').item.json.baseUrl }}/audio",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-Token",
+              "value": "={{ $('Config').item.json.apiToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "options": {
+          "timeout": 1800000
+        },
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"slug\": $('Get Script').item.json.slug } }}"
+      },
+      "id": "2f1a3b804cae4e2eae764814",
+      "name": "Make Audio",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2860,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').item.json.botBase }}/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"chat_id\": $('Config').item.json.chatId, \"text\": '✅ Audio done' } }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "9301c7cce74e4cc4ae94272b",
+      "name": "Notify Audio",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3080,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').item.json.baseUrl }}/visuals",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-Token",
+              "value": "={{ $('Config').item.json.apiToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "options": {
+          "timeout": 1800000
+        },
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"slug\": $('Get Script').item.json.slug } }}"
+      },
+      "id": "da82c68a5fa0402e955dd360",
+      "name": "Make Visuals",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3300,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').item.json.botBase }}/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"chat_id\": $('Config').item.json.chatId, \"text\": '✅ Visuals done' } }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "4dabc910abde4e4b9c13692a",
+      "name": "Notify Visuals",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3520,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').item.json.baseUrl }}/assemble",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-Token",
+              "value": "={{ $('Config').item.json.apiToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "options": {
+          "timeout": 1800000
+        },
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"slug\": $('Get Script').item.json.slug } }}"
+      },
+      "id": "53c8d0657075494f946313b4",
+      "name": "Assemble",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3740,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').item.json.botBase }}/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"chat_id\": $('Config').item.json.chatId, \"text\": '✅ Assembled' } }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "77ece323fc464e5fb5e7a61a",
+      "name": "Notify Assembled",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3960,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').item.json.botBase }}/sendPhoto",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"chat_id\": $('Config').item.json.chatId, \"photo\": $('Assemble').item.json.thumbnail_url, \"caption\": \"🎬 \" + $('Get Script').item.json.title + \"\\nWatch / download: \" + $('Assemble').item.json.final_url } }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "93caa0d928ce4155ac7087b9",
+      "name": "Send Final",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        4180,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').item.json.botBase }}/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"chat_id\": $('Config').item.json.chatId, \"text\": \"Upload as PRIVATE to YouTube?\", \"reply_markup\": { \"inline_keyboard\": [[ { \"text\": \"📤 upload\", \"url\": $execution.resumeUrl + \"?action=upload\" }, { \"text\": \"❌ cancel\", \"url\": $execution.resumeUrl + \"?action=cancel\" } ]] } } }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "d0e1cdd391244bf7b68d9e4d",
+      "name": "Ask Upload",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        4400,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "resume": "webhook",
+        "options": {}
+      },
+      "id": "6ea4da63b4154b98bbb4b65c",
+      "name": "Wait Upload",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        4620,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const j=$json||{}; const src=j.query||j.body||j.params||j;\nreturn [{ json: { decision: (src.action||'').toString() } }];"
+      },
+      "id": "f4da8544850a4dc895e98ebc",
+      "name": "Read Upload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4840,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "282978a8a03b4a26a172b639",
+              "leftValue": "={{ $json.decision }}",
+              "rightValue": "upload",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "63134f346d8d45af896f8d71",
+      "name": "If Upload",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        5060,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').item.json.botBase }}/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"chat_id\": $('Config').item.json.chatId, \"text\": '🛑 Upload cancelled. final.mp4 is saved on the server.' } }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "73d9fd9e88b7458a870fb562",
+      "name": "Notify Cancelled",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        5280,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').item.json.baseUrl }}/upload",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-Token",
+              "value": "={{ $('Config').item.json.apiToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "options": {
+          "timeout": 1800000
+        },
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"slug\": $('Get Script').item.json.slug } }}"
+      },
+      "id": "5b7f41d1955644498f29ea52",
+      "name": "Upload",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        5280,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').item.json.botBase }}/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"chat_id\": $('Config').item.json.chatId, \"text\": '📤 Uploaded (private): ' + $json.video_url } }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "25ba63ea82804062a3569baf",
+      "name": "Notify Uploaded",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        5500,
+        120
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "0093dad6d9504743bb907913",
+      "name": "On Error",
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        660,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').item.json.botBase }}/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"chat_id\": $('Config').item.json.chatId, \"text\": '❌ Error in workflow at: ' + ($json.execution && $json.execution.lastNodeExecuted || 'unknown step') } }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "2b489c32a69e4249a4d2210f",
+      "name": "Notify Error",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        880,
+        640
+      ]
+    }
+  ],
+  "connections": {
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "Config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Config": {
+      "main": [
+        [
+          {
+            "node": "Notify Start",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notify Start": {
+      "main": [
+        [
+          {
+            "node": "Get Ideas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Ideas": {
+      "main": [
+        [
+          {
+            "node": "Ask Pick",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ask Pick": {
+      "main": [
+        [
+          {
+            "node": "Wait Pick",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait Pick": {
+      "main": [
+        [
+          {
+            "node": "Parse Pick",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Pick": {
+      "main": [
+        [
+          {
+            "node": "Get Script",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Script": {
+      "main": [
+        [
+          {
+            "node": "Send Preview",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Preview": {
+      "main": [
+        [
+          {
+            "node": "Ask Approve",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ask Approve": {
+      "main": [
+        [
+          {
+            "node": "Wait Approve",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait Approve": {
+      "main": [
+        [
+          {
+            "node": "Read Approve",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Approve": {
+      "main": [
+        [
+          {
+            "node": "If Approve",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Approve": {
+      "main": [
+        [
+          {
+            "node": "Make Audio",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Notify Rejected",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Make Audio": {
+      "main": [
+        [
+          {
+            "node": "Notify Audio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notify Audio": {
+      "main": [
+        [
+          {
+            "node": "Make Visuals",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Make Visuals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Make Visuals": {
+      "main": [
+        [
+          {
+            "node": "Notify Visuals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notify Visuals": {
+      "main": [
+        [
+          {
+            "node": "Assemble",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Assemble": {
+      "main": [
+        [
+          {
+            "node": "Notify Assembled",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notify Assembled": {
+      "main": [
+        [
+          {
+            "node": "Send Final",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Final": {
+      "main": [
+        [
+          {
+            "node": "Ask Upload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ask Upload": {
+      "main": [
+        [
+          {
+            "node": "Wait Upload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait Upload": {
+      "main": [
+        [
+          {
+            "node": "Read Upload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Upload": {
+      "main": [
+        [
+          {
+            "node": "If Upload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Upload": {
+      "main": [
+        [
+          {
+            "node": "Upload",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Notify Cancelled",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload": {
+      "main": [
+        [
+          {
+            "node": "Notify Uploaded",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On Error": {
+      "main": [
+        [
+          {
+            "node": "Notify Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}

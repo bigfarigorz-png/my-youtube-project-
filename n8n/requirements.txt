@@ -1,0 +1,5 @@
+# Extra dependencies for render_service.py (the HTTP wrapper the n8n workflow calls).
+# Install together with the base requirements:
+#   pip install -r requirements.txt -r n8n/requirements.txt
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0

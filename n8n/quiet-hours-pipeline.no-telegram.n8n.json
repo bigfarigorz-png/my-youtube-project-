@@ -1,0 +1,327 @@
+{
+  "name": "Quiet Hours Pipeline (no Telegram)",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "a59e1fb63f7046a2b91f655d",
+      "name": "Start",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "9a9885be82d9426cb374f233",
+              "name": "baseUrl",
+              "value": "https://YOUR-PUBLIC-SERVICE-URL",
+              "type": "string"
+            },
+            {
+              "id": "fc69f40d938c429ab9554cb3",
+              "name": "apiToken",
+              "value": "YOUR_RENDER_API_TOKEN",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "f6465d37e837468a9872a800",
+      "name": "Config",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        220,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').item.json.baseUrl }}/ideas",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-Token",
+              "value": "={{ $('Config').item.json.apiToken }}"
+            }
+          ]
+        },
+        "sendBody": false,
+        "options": {
+          "timeout": 1800000
+        }
+      },
+      "id": "288d80612f5a45c2949a3769",
+      "name": "Get Ideas",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        440,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// auto-pick the first idea; change [0] to pick a different one\nconst list = $json.ideas || [];\nif (!list.length) throw new Error('no ideas returned');\nreturn [{ json: { idea: list[0] } }];"
+      },
+      "id": "5aa1ca022b4a4d4488e43713",
+      "name": "Pick Idea",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        660,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').item.json.baseUrl }}/script",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-Token",
+              "value": "={{ $('Config').item.json.apiToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "options": {
+          "timeout": 1800000
+        },
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"idea\": $json.idea } }}"
+      },
+      "id": "0b3079af50844615a89cb136",
+      "name": "Get Script",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        880,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').item.json.baseUrl }}/audio",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-Token",
+              "value": "={{ $('Config').item.json.apiToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "options": {
+          "timeout": 1800000
+        },
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"slug\": $('Get Script').item.json.slug } }}"
+      },
+      "id": "35d1d576177d4ae3aa770a7e",
+      "name": "Make Audio",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1100,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').item.json.baseUrl }}/visuals",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-Token",
+              "value": "={{ $('Config').item.json.apiToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "options": {
+          "timeout": 1800000
+        },
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"slug\": $('Get Script').item.json.slug } }}"
+      },
+      "id": "957aece2b41a455ba27d1d2e",
+      "name": "Make Visuals",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1320,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').item.json.baseUrl }}/assemble",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-Token",
+              "value": "={{ $('Config').item.json.apiToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "options": {
+          "timeout": 1800000
+        },
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"slug\": $('Get Script').item.json.slug } }}"
+      },
+      "id": "fc6c1946040742c5b299d053",
+      "name": "Assemble",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1540,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').item.json.baseUrl }}/upload",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-Token",
+              "value": "={{ $('Config').item.json.apiToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "options": {
+          "timeout": 1800000
+        },
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"slug\": $('Get Script').item.json.slug } }}"
+      },
+      "id": "0d6fdc553558405390d7a53c",
+      "name": "Upload (private)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1760,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "Config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Config": {
+      "main": [
+        [
+          {
+            "node": "Get Ideas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Ideas": {
+      "main": [
+        [
+          {
+            "node": "Pick Idea",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pick Idea": {
+      "main": [
+        [
+          {
+            "node": "Get Script",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Script": {
+      "main": [
+        [
+          {
+            "node": "Make Audio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Make Audio": {
+      "main": [
+        [
+          {
+            "node": "Make Visuals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Make Visuals": {
+      "main": [
+        [
+          {
+            "node": "Assemble",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Assemble": {
+      "main": [
+        [
+          {
+            "node": "Upload (private)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "meta": {},
+  "tags": []
+}

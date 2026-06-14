@@ -1,0 +1,21 @@
+# Secrets & credentials
+.env
+token.json
+client_secret*.json
+*.client_secret.json
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env.local
+
+# Generated artifacts
+output/*/
+!output/.gitkeep
+
+# User-supplied media
+input/*
+!input/.gitkeep
+!input/README.md
