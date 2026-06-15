@@ -82,4 +82,79 @@
       if (ok) ok.hidden = false;
     });
   }
+
+  /* Lightbox for catalogue galleries: any container with [data-lightbox].
+     Each child <a href="full.jpg"> opens full-size with prev/next/keyboard. */
+  (function () {
+    var grids = document.querySelectorAll("[data-lightbox]");
+    if (!grids.length) return;
+    var overlay = null, imgEl, capEl, items = [], idx = 0;
+
+    function build() {
+      overlay = document.createElement("div");
+      overlay.className = "lb";
+      overlay.setAttribute("aria-hidden", "true");
+      overlay.innerHTML =
+        '<div class="lb__backdrop" data-lb-close></div>' +
+        '<button class="lb__btn lb__close" data-lb-close aria-label="Close">×</button>' +
+        '<button class="lb__btn lb__prev" data-lb-prev aria-label="Previous page">‹</button>' +
+        '<figure class="lb__stage"><img class="lb__img" alt=""><figcaption class="lb__cap"></figcaption></figure>' +
+        '<button class="lb__btn lb__next" data-lb-next aria-label="Next page">›</button>';
+      document.body.appendChild(overlay);
+      imgEl = overlay.querySelector(".lb__img");
+      capEl = overlay.querySelector(".lb__cap");
+      overlay.addEventListener("click", function (e) {
+        if (e.target.hasAttribute("data-lb-close")) close();
+        else if (e.target.hasAttribute("data-lb-prev")) go(-1);
+        else if (e.target.hasAttribute("data-lb-next")) go(1);
+      });
+    }
+    function preload(i) { if (items[i]) { var im = new Image(); im.src = items[i].src; } }
+    function show() {
+      var it = items[idx];
+      imgEl.src = it.src; imgEl.alt = it.alt;
+      capEl.textContent = (idx + 1) + " / " + items.length;
+      preload(idx + 1); preload(idx - 1);
+    }
+    function go(d) { idx = (idx + d + items.length) % items.length; show(); }
+    function open(list, i) {
+      items = list; idx = i;
+      if (!overlay) build();
+      show();
+      overlay.classList.add("open");
+      overlay.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+    function close() {
+      if (!overlay) return;
+      overlay.classList.remove("open");
+      overlay.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+    document.addEventListener("keydown", function (e) {
+      if (!overlay || !overlay.classList.contains("open")) return;
+      if (e.key === "Escape") close();
+      else if (e.key === "ArrowLeft") go(-1);
+      else if (e.key === "ArrowRight") go(1);
+    });
+    grids.forEach(function (grid) {
+      var anchors = [].slice.call(grid.querySelectorAll("a"));
+      var list = anchors.map(function (a) {
+        var im = a.querySelector("img");
+        return { src: a.getAttribute("href"), alt: im ? im.alt : "" };
+      });
+      anchors.forEach(function (a, i) {
+        a.addEventListener("click", function (e) { e.preventDefault(); open(list, i); });
+      });
+    });
+    var sx = 0;
+    document.addEventListener("touchstart", function (e) {
+      if (overlay && overlay.classList.contains("open")) sx = e.touches[0].clientX;
+    }, { passive: true });
+    document.addEventListener("touchend", function (e) {
+      if (!overlay || !overlay.classList.contains("open")) return;
+      var dx = e.changedTouches[0].clientX - sx;
+      if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
+    }, { passive: true });
+  })();
 })();
