@@ -134,6 +134,7 @@
         '<p class="sheet__tag">' + esc(s.tagline) + "</p>" +
         '<div class="sheet__rate">' + stars(s.value) + '<span class="sheet__ratelab">Value &amp; prestige</span></div>' +
         "<p class=\"sheet__story\">" + esc(s.story) + "</p>" + acidNote + "</div>" +
+      (s.scene ? '<figure class="sheet__scene"><img loading="lazy" src="' + s.scene + '" alt="' + esc(s.sceneAlt || s.name) + '"><figcaption>Seen in a project</figcaption></figure>' : "") +
       '<div class="sheet__cols">' +
         '<section class="sheet__block"><h4 class="sheet__h">Specification</h4><div class="spec2">' + specRows(s) + "</div></section>" +
         '<section class="sheet__block"><h4 class="sheet__h">Where you can use it</h4><div class="suit">' + suitRows(s) + "</div></section>" +

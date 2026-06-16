@@ -696,3 +696,8 @@ h1, h2, h3, h4 { font-family: var(--display); font-weight: 600; line-height: 1.0
   .pagehero--light img { animation: none; }
   .sheet__panel, .sheet__backdrop { animation: none; }
 }
+
+/* ---- Stone drawer: "seen in a project" scene -------------------------- */
+.sheet__scene { position: relative; margin: 0; border-top: 1px solid var(--line); }
+.sheet__scene img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; display: block; }
+.sheet__scene figcaption { position: absolute; left: 14px; bottom: 14px; font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: #fff; background: rgba(8,7,5,0.55); padding: 4px 11px; border-radius: 100px; }
