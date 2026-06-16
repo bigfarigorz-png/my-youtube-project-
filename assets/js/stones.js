@@ -1,0 +1,198 @@
+/* ADONIS CO — stone catalogue data
+   Original content written for Adonis Co. Suitability and care notes reflect
+   the real petrology of each material (carbonate stones etch with acid;
+   quartzite does not). Scores: 0 Not advised · 1 With care · 2 Good · 3 Ideal. */
+window.STONES = [
+  {
+    slug: "golden-onyx",
+    name: "Golden Onyx",
+    type: "Onyx",
+    colour: "gold",
+    colours: ["Gold", "Amber", "Honey"],
+    finishes: ["Polished", "Honed"],
+    origin: "Iran",
+    card: "assets/img/stone/golden-onyx-card.jpg",
+    full: "assets/img/stone/golden-onyx-full.jpg",
+    tagline: "Translucent, vein-cut, made to be backlit.",
+    story: "Onyx is laid down drop by drop in mineral springs, which is why the light seems to travel inside it. Our golden onyx is vein-cut to keep those honey bands flowing across the slab — set it against a light box and the wall turns to amber glass.",
+    value: 5, rarity: 5,
+    acid: "sensitive",
+    specs: { Type: "Onyx (carbonate)", Colour: "Gold · honey · amber", Finish: "Polished · Honed", Thickness: "18 · 20 mm", "Slab size": "up to 280 × 160 cm", Origin: "Iran", Hardness: "3 Mohs (soft)" },
+    suit: { Kitchen: 1, Bathroom: 2, Flooring: 1, Walls: 3, Outdoor: 0, "High-traffic": 1 },
+    care: [
+      "Acid-sensitive: wine, citrus and harsh cleaners will etch the surface — wipe spills quickly.",
+      "Clean only with a pH-neutral stone soap; never vinegar or bleach.",
+      "Seal on installation and once a year after.",
+      "Best as a backlit feature — translucency is the whole point."
+    ],
+    uses: "A statement stone, not a workhorse. Onyx belongs on backlit feature walls, reception desks, headboards and bar fronts where it is seen and not scrubbed. Keep it out of busy kitchens and entrance floors."
+  },
+  {
+    slug: "green-marble",
+    name: "Green Marble",
+    type: "Marble",
+    colour: "green",
+    colours: ["Green", "Jade", "Gold"],
+    finishes: ["Polished", "Honed"],
+    origin: "Iran",
+    card: "assets/img/stone/green-marble-card.jpg",
+    full: "assets/img/stone/green-marble-full.jpg",
+    tagline: "Sage and jade grounds threaded with gold.",
+    story: "Green marble reads calm from across a room and dramatic up close, where gold veins break through the jade like rivers seen from the air. No two slabs share the same map — we photograph each block so you choose the exact one.",
+    value: 4, rarity: 4,
+    acid: "sensitive",
+    specs: { Type: "Marble (carbonate)", Colour: "Sage · jade · gold vein", Finish: "Polished · Honed", Thickness: "18 · 20 mm", "Slab size": "up to 300 × 180 cm", Origin: "Iran", Hardness: "3–4 Mohs" },
+    suit: { Kitchen: 1, Bathroom: 2, Flooring: 2, Walls: 3, Outdoor: 1, "High-traffic": 2 },
+    care: [
+      "Acid-sensitive — etches with citrus, wine and acidic cleaners.",
+      "A honed finish hides etching and fingerprints better than polished.",
+      "Reseal yearly; blot spills, don't wipe them across the surface.",
+      "pH-neutral cleaner only."
+    ],
+    uses: "Feature walls, vanity tops, fireplace surrounds and reception floors that see normal foot traffic. A beautiful choice for a powder room; for a main kitchen, specify honed and accept a living patina over time."
+  },
+  {
+    slug: "grey-marble",
+    name: "Grey Marble",
+    type: "Marble",
+    colour: "grey",
+    colours: ["Grey", "Dove", "Pewter"],
+    finishes: ["Polished", "Honed", "Brushed"],
+    origin: "Iran",
+    card: "assets/img/stone/grey-marble-card.jpg",
+    full: "assets/img/stone/grey-marble-full.jpg",
+    tagline: "Even, composed greys for large surfaces.",
+    story: "The all-rounder. Grey marble carries a quiet, even tone that lets a big floor or a long wall read as one continuous surface — the kind of background that makes everything placed on it look considered.",
+    value: 3, rarity: 2,
+    acid: "sensitive",
+    specs: { Type: "Marble (carbonate)", Colour: "Dove · pewter grey", Finish: "Polished · Honed · Brushed", Thickness: "18 · 20 mm", "Slab size": "up to 300 × 180 cm", Origin: "Iran", Hardness: "3–4 Mohs" },
+    suit: { Kitchen: 1, Bathroom: 3, Flooring: 3, Walls: 3, Outdoor: 1, "High-traffic": 2 },
+    care: [
+      "Acid-sensitive; honed grey hides daily wear remarkably well.",
+      "Seal on install and yearly.",
+      "Microfibre and pH-neutral soap keep the sheen.",
+      "Felt pads under anything that slides."
+    ],
+    uses: "The safe choice for large bathroom floors and walls, lobbies and stair treads where you want calm and continuity. Honed grey is forgiving enough for family hallways."
+  },
+  {
+    slug: "white-marble",
+    name: "White Marble",
+    type: "Marble",
+    colour: "white",
+    colours: ["White", "Cream", "Grey vein"],
+    finishes: ["Polished", "Honed"],
+    origin: "Iran",
+    card: "assets/img/stone/white-marble-card.jpg",
+    full: "assets/img/stone/white-marble-full.jpg",
+    tagline: "The luminous classic, soft grey veining.",
+    story: "There is a reason white marble has meant luxury for three thousand years: it gathers light. Bright cream grounds with soft grey veining give a room an instant sense of space and calm — the most requested stone we carry.",
+    value: 4, rarity: 3,
+    acid: "sensitive",
+    specs: { Type: "Marble (carbonate)", Colour: "Bright white · cream · grey vein", Finish: "Polished · Honed", Thickness: "18 · 20 mm", "Slab size": "up to 300 × 180 cm", Origin: "Iran", Hardness: "3 Mohs" },
+    suit: { Kitchen: 1, Bathroom: 3, Flooring: 2, Walls: 3, Outdoor: 1, "High-traffic": 2 },
+    care: [
+      "Acid-sensitive — the lighter the stone, the more visible an etch.",
+      "Honed white forgives daily life; polished white rewards careful owners.",
+      "Seal twice on install, then yearly.",
+      "Wipe cosmetics, citrus and wine immediately."
+    ],
+    uses: "Vanity tops, bathroom walls and floors, feature fireplaces and elegant reception areas. For kitchens, choose honed and treat the inevitable patina as character, not damage."
+  },
+  {
+    slug: "cream-limestone",
+    name: "Cream Lime Stone",
+    type: "Limestone",
+    colour: "cream",
+    colours: ["Cream", "Beige", "Sand"],
+    finishes: ["Honed", "Brushed"],
+    origin: "Iran",
+    card: "assets/img/stone/cream-limestone-card.jpg",
+    full: "assets/img/stone/cream-limestone-full.jpg",
+    tagline: "Warm, matte and grounding — the quiet luxury.",
+    story: "Limestone is the colour of sunlight on a plaster wall. Its soft, even, matte surface feels warm underfoot and calm on the eye — the stone designers reach for when they want luxury that whispers instead of shouts.",
+    value: 3, rarity: 2,
+    acid: "sensitive",
+    specs: { Type: "Limestone (carbonate)", Colour: "Cream · beige · sand", Finish: "Honed · Brushed", Thickness: "20 · 30 mm", "Slab size": "up to 290 × 175 cm", Origin: "Iran", Hardness: "3–4 Mohs" },
+    suit: { Kitchen: 1, Bathroom: 2, Flooring: 3, Walls: 3, Outdoor: 2, "High-traffic": 3 },
+    care: [
+      "Porous: seal well on install and keep it sealed — it drinks spills if you don't.",
+      "Acid-sensitive, but the matte finish hides etching better than any polished stone.",
+      "Brushed limestone gives grip for wet and outdoor floors.",
+      "pH-neutral cleaner; avoid acidic descalers."
+    ],
+    uses: "Made for floors — interior living areas, hallways, hammams and shaded terraces. Brushed for grip outdoors, honed indoors. A warm, hard-wearing backdrop for almost any palette."
+  },
+  {
+    slug: "black-white",
+    name: "Black & White Marble",
+    type: "Marble",
+    colour: "black",
+    colours: ["Black", "White vein"],
+    finishes: ["Polished", "Honed"],
+    origin: "Iran",
+    card: "assets/img/stone/black-white-card.jpg",
+    full: "assets/img/stone/black-white-full.jpg",
+    tagline: "High drama — white lightning on a dark ground.",
+    story: "A dark ground split by bright white veins is the most theatrical stone in the yard. Book-matched across two slabs, the veins mirror into a butterfly that becomes the single thing everyone in the room looks at.",
+    value: 4, rarity: 4,
+    acid: "sensitive",
+    specs: { Type: "Marble (carbonate)", Colour: "Black · white vein", Finish: "Polished · Honed", Thickness: "18 · 20 mm", "Slab size": "up to 300 × 180 cm", Origin: "Iran", Hardness: "3–4 Mohs" },
+    suit: { Kitchen: 1, Bathroom: 2, Flooring: 2, Walls: 3, Outdoor: 0, "High-traffic": 1 },
+    care: [
+      "Acid-sensitive; etch marks show as dull patches on the black — keep it away from citrus.",
+      "Polished black shows dust and water spots, so it wants a wipe-down.",
+      "Ask us to book-match slabs for a mirrored vein.",
+      "Seal yearly, pH-neutral cleaner only."
+    ],
+    uses: "Feature walls, fireplace surrounds, bar fronts and statement vanity tops where it earns its keep as the hero. Book-match it. Avoid busy kitchen counters and outdoor use."
+  },
+  {
+    slug: "quartzite",
+    name: "Quartzite",
+    type: "Quartzite",
+    colour: "grey",
+    colours: ["White", "Grey", "Multicolour"],
+    finishes: ["Polished", "Honed", "Leathered"],
+    origin: "Iran",
+    card: "assets/img/stone/quartzite-card.jpg",
+    full: "assets/img/stone/quartzite-full.jpg",
+    tagline: "Marble looks, granite toughness — the safe worktop.",
+    story: "Quartzite begins as sandstone and is recrystallised by heat and pressure into one of the hardest stones you can put in a home. It can carry the veining of marble while shrugging off the things that ruin it — acid, heat and knives.",
+    value: 4, rarity: 3,
+    acid: "resistant",
+    specs: { Type: "Quartzite (silicate)", Colour: "White · grey · multicolour", Finish: "Polished · Honed · Leathered", Thickness: "20 · 30 mm", "Slab size": "up to 320 × 190 cm", Origin: "Iran", Hardness: "7 Mohs (very hard)" },
+    suit: { Kitchen: 3, Bathroom: 3, Flooring: 3, Walls: 3, Outdoor: 3, "High-traffic": 3 },
+    care: [
+      "Acid- and heat-resistant — the one stone here you can trust behind a hob and under citrus.",
+      "Scratch-resistant at 7 Mohs; harder than a steel knife.",
+      "Seal once on install; very low maintenance after.",
+      "Leathered finish hides everything and grips when wet."
+    ],
+    uses: "The durable choice: kitchen worktops, busy family floors, outdoor kitchens and pool surrounds, commercial reception desks. If you want the look of marble without the worry, this is the slab."
+  },
+  {
+    slug: "cappuccino",
+    name: "Cappuccino Marble",
+    type: "Marble",
+    colour: "cream",
+    colours: ["Beige", "Brown", "Cream"],
+    finishes: ["Polished", "Honed"],
+    origin: "Iran",
+    card: "assets/img/stone/cappuccino-card.jpg",
+    full: "assets/img/stone/cappuccino-full.jpg",
+    tagline: "Warm beige with soft mocha veining.",
+    story: "Named for the colour in the cup — milky beige drawn through with mocha veins. Cappuccino is the easy neutral that warms a cool room and sits happily next to timber, brass and linen.",
+    value: 2, rarity: 2,
+    acid: "sensitive",
+    specs: { Type: "Marble (carbonate)", Colour: "Beige · mocha · cream", Finish: "Polished · Honed", Thickness: "18 · 20 mm", "Slab size": "up to 290 × 175 cm", Origin: "Iran", Hardness: "3–4 Mohs" },
+    suit: { Kitchen: 1, Bathroom: 2, Flooring: 3, Walls: 3, Outdoor: 1, "High-traffic": 2 },
+    care: [
+      "Acid-sensitive; the warm tone hides minor etching better than white stone.",
+      "Honed finish recommended for floors and busy areas.",
+      "Seal on install and yearly.",
+      "pH-neutral cleaner; blot spills early."
+    ],
+    uses: "A warm, affordable neutral for floors, hallways, bathroom walls and cladding. Pairs beautifully with wood and brass — the supporting actor that makes a scheme feel finished."
+  }
+];
