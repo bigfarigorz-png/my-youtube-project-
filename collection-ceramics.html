@@ -43,11 +43,12 @@
         <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a> / <span>Porcelain &amp; Ceramic</span></nav>
         <span class="eyebrow">Collection 03 · Veronzo</span>
         <h1 class="display" style="margin-top:14px">Veronzo<br>Porcelain</h1>
-        <p class="lede">The complete <strong>Veronzo</strong> porcelain catalogue — large-format, rectified tile that reproduces marble, stone and concrete in a dense, hard-wearing body. Browse all 109 pages below, or download the full-resolution catalogue.</p>
+        <p class="lede">The complete <strong>Veronzo</strong> porcelain collection — large-format, rectified tile that reproduces marble, stone and concrete in a dense, hard-wearing body. Browse every design by look and size below, flip through the original catalogue, or download it in full.</p>
         <div class="chapnav">
           <a href="#about">About Veronzo</a>
           <a href="#formats">Sizes &amp; formats</a>
-          <a href="#catalogue">The catalogue</a>
+          <a href="#tiles">The tiles</a>
+          <a href="#catalogue">Original pages</a>
           <a href="#download">Download (PDF)</a>
         </div>
       </div>
@@ -88,12 +89,39 @@
       </div>
     </section>
 
+    <!-- STRUCTURED TILE CATALOGUE — extracted from the Veronzo files -->
+    <section class="section catalog" id="tiles" style="padding-top:0">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">The collection · by design</span>
+          <h2 class="h2">Browse the Veronzo tiles.</h2>
+          <p class="lede">Every design pulled from the 2025 catalogue. Filter by look, colour or size, then open one for its texture, a room it's used in, its product code and finish, and where it belongs. Porcelain resists acid, scratches, heat and frost — so it goes where natural stone can't.</p>
+        </div>
+        <div class="catalog__bar" data-tile-bar aria-label="Filters"></div>
+        <div class="catalog__toolbar reveal">
+          <input type="search" class="catalog__search" data-tile-search placeholder="Search design, look or colour…" aria-label="Search tiles" />
+          <div class="catalog__tools">
+            <span class="catalog__count" data-tile-count></span>
+            <label class="catalog__sortlab">Sort
+              <select class="catalog__sort" data-tile-sort aria-label="Sort tiles">
+                <option value="featured">Featured</option>
+                <option value="az">A → Z</option>
+                <option value="format">Largest format</option>
+              </select>
+            </label>
+          </div>
+        </div>
+        <div class="catalog__grid" data-tile-grid></div>
+        <noscript><p class="lede" style="margin-top:24px">The interactive catalogue needs JavaScript — or browse the original pages below.</p></noscript>
+      </div>
+    </section>
+
     <section class="section dark" id="catalogue">
       <div class="wrap">
         <div class="section-head reveal">
-          <span class="eyebrow">The full collection · 2025</span>
-          <h2 class="h2">The complete catalogue.</h2>
-          <p class="lede">All 109 pages of the Veronzo collection. Tap any page to open it full-size and flip through with the arrows; download the full-resolution PDF below.</p>
+          <span class="eyebrow">The original catalogue</span>
+          <h2 class="h2">Or flip through the printed pages.</h2>
+          <p class="lede">Prefer the original? Here are all 109 pages of the Veronzo 2025 catalogue — tap any page to open it full-size and flip through, or download the full-resolution PDF below.</p>
         </div>
         <div class="cat-grid" data-lightbox="catalogue" aria-label="Veronzo catalogue, 109 pages">
           <a class="cat-cell cat-cell--portrait" href="assets/img/catalog/full/vc-001.jpg" data-page="1"><img loading="lazy" src="assets/img/catalog/thumb/vc-001.jpg" alt="Veronzo catalogue page 1 of 109"></a>
@@ -250,6 +278,8 @@
       </div>
     </div>
   </footer>
+  <script src="assets/js/veronzo.js"></script>
+  <script src="assets/js/veronzo-catalog.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>
