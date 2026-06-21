@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; upgrade-insecure-requests" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="theme-color" content="#0B0A08" />
   <title>Adonis Co — Persian Stone, Brick &amp; Ceramic, Delivered to Armenia</title>
   <meta name="description" content="Adonis Co exports natural stone, clay brick and ceramic tile direct from Iranian quarries and kilns to builders, architects and showrooms across Armenia. Quoted by the container, finished to spec, delivered to Yerevan." />
   <meta property="og:title" content="Adonis Co — Persian Stone, Brick & Ceramic for Armenia" />
@@ -13,9 +14,10 @@
   <meta property="og:image" content="assets/img/r-hero-onyx.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Manrope:wght@300;400;500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/styles.css" />
-  <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'&gt;&lt;rect width='32' height='32' fill='%2315140f'/&gt;&lt;text x='16' y='23' font-size='20' text-anchor='middle' fill='%23C68A3C' font-family='Georgia'&gt;A&lt;/text&gt;&lt;/svg&gt;" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,380;0,9..144,430;0,9..144,500;0,9..144,600;1,9..144,380;1,9..144,430&family=Manrope:wght@300;400;500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="assets/img/opt/r-hero-onyx.avif" type="image/avif" fetchpriority="high" imagesrcset="assets/img/opt/r-hero-onyx-760.avif 760w, assets/img/opt/r-hero-onyx.avif 1280w" imagesizes="100vw" />
+  <link rel="stylesheet" href="assets/css/cinematic.css" />
+  <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'&gt;&lt;rect width='32' height='32' fill='%230B0A08'/&gt;&lt;text x='16' y='23' font-size='20' text-anchor='middle' fill='%23E0A24E' font-family='Georgia'&gt;A&lt;/text&gt;&lt;/svg&gt;" />
 </head>
 <body>
   <!-- ============================ HEADER ============================ -->
@@ -30,12 +32,12 @@
           <li><a href="collection-bricks.html">Bricks</a></li>
           <li><a href="collection-ceramics.html">Ceramics</a></li>
           <li><a href="projects.html">Gallery</a></li>
-          <li><a href="index.html#about">About</a></li>
-          <li><a href="index.html#contact">Contact</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
       <div class="nav-right">
-        <a class="btn btn--amber nav-cta-desktop" href="index.html#contact">Request a quote</a>
+        <a class="btn btn--amber nav-cta-desktop" href="#contact">Request a quote</a>
         <button class="nav-toggle" aria-label="Open menu" aria-controls="menu" aria-expanded="false">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
         </button>
@@ -47,75 +49,103 @@
     <!-- ============================ HERO ============================ -->
     <section class="hero">
       <div class="hero__media">
-        <img src="assets/img/r-hero-onyx.jpg" alt="A large vein-cut golden onyx slab with honey and amber banding" fetchpriority="high" />
+        <picture>
+          <source type="image/avif" srcset="assets/img/opt/r-hero-onyx-760.avif 760w, assets/img/opt/r-hero-onyx.avif 1280w" sizes="100vw" />
+          <source type="image/webp" srcset="assets/img/opt/r-hero-onyx-760.webp 760w, assets/img/opt/r-hero-onyx.webp 1280w" sizes="100vw" />
+          <img src="assets/img/r-hero-onyx.jpg" width="1280" height="720" alt="A large vein-cut golden onyx slab with honey and amber banding, lit from behind" fetchpriority="high" decoding="async" />
+        </picture>
       </div>
+
       <p class="hero__route"><span class="flow">◆</span> Iran <span class="flow">→</span> <b>Armenia</b> · Adonis&nbsp;Co</p>
+
       <div class="wrap hero__inner">
-        <h1 class="display reveal in">Persian stone, brick &amp; ceramic, <em>delivered to Armenia.</em></h1>
-        <p class="hero__sub lede reveal in" data-delay="1">We export natural stone, clay brick and ceramic tile direct from Iranian quarries and kilns to builders, architects and showrooms across Armenia — quoted by the container, finished to spec, cleared to Yerevan.</p>
-        <div class="hero__cta reveal in" data-delay="2">
+        <h1 class="display lines">
+          <span class="line"><span>Persian stone, brick</span></span>
+          <span class="line"><span>&amp; ceramic, <em>delivered</em></span></span>
+          <span class="line"><span><em>to Armenia.</em></span></span>
+        </h1>
+        <p class="hero__sub lede">We export natural stone, clay brick and ceramic tile direct from Iranian quarries and kilns to builders, architects and showrooms across Armenia — quoted by the container, finished to spec, cleared to Yerevan.</p>
+        <div class="hero__cta">
           <a class="btn btn--amber" href="#collections">Explore the catalogue <span class="arrow">→</span></a>
           <a class="btn btn--ghost" href="#contact">Request a quote</a>
         </div>
       </div>
-      <div class="hero__scroll">Scroll</div>
+
+      <div class="wrap hero__foot">
+        <span class="hero__scroll">Scroll to enter the gallery</span>
+        <span class="hero__credits">Vein-cut onyx · backlit grade · in stock</span>
+      </div>
     </section>
 
     <!-- ============================ TICKER ============================ -->
     <div class="ticker" aria-hidden="true">
       <div class="ticker__track">
-        <span>Golden Onyx</span><span>Green Marble</span><span>Grey &amp; White Marble</span><span>Cream Lime Stone</span><span>Quartzite &amp; Basalt</span><span>Veronzo Porcelain</span><span>Clay Brick</span>
-        <span>Golden Onyx</span><span>Green Marble</span><span>Grey &amp; White Marble</span><span>Cream Lime Stone</span><span>Quartzite &amp; Basalt</span><span>Veronzo Porcelain</span><span>Clay Brick</span>
+        <span>Golden Onyx</span><span>Green Marble</span><span>Grey &amp; White Marble</span><span>Cream Limestone</span><span>Quartzite &amp; Basalt</span><span>Veronzo Porcelain</span><span>Clay Brick</span>
+        <span>Golden Onyx</span><span>Green Marble</span><span>Grey &amp; White Marble</span><span>Cream Limestone</span><span>Quartzite &amp; Basalt</span><span>Veronzo Porcelain</span><span>Clay Brick</span>
       </div>
     </div>
 
     <!-- ============================ BRIDGE / INTRO ============================ -->
-    <section class="section dark">
+    <section class="section">
       <div class="wrap bridge">
-        <div class="reveal">
-          <div class="bridge__route">
+        <div>
+          <div class="bridge__route" data-anim="up">
             <span class="bridge__node"><b>ایران</b><span>Iran · the quarry</span></span>
             <span class="bridge__line"></span>
             <span class="bridge__node"><b>Հայաստան</b><span>Armenia · the site</span></span>
           </div>
-          <h2 class="h2">One border, three trades, handled end&#8209;to&#8209;end.</h2>
-          <p class="lede" style="margin-top:20px">Iran sits on some of the oldest stone and clay in the world — and on Armenia's doorstep. Adonis Co turns that proximity into an advantage: a single supplier for stone, brick and ceramic, bought at source and brought across the border without the markup of three middlemen.</p>
-          <p style="margin-top:16px;color:var(--on-dark-soft)">From block selection in the quarry to a pallet on your site in Yerevan, the chain stays in one pair of hands. You approve the samples; we handle the cutting, the crating, the paperwork and the crossing.</p>
+          <h2 class="h2" data-anim="up">One border, three trades, handled end&#8209;to&#8209;end.</h2>
+          <p class="lede" data-anim="up" style="margin-top:22px">Iran sits on some of the oldest stone and clay in the world — and on Armenia's doorstep. Adonis Co turns that proximity into an advantage: a single supplier for stone, brick and ceramic, bought at source and brought across the border without the markup of three middlemen.</p>
+          <p data-anim="up" style="margin-top:16px;color:var(--ivory-dim)">From block selection in the quarry to a pallet on your site in Yerevan, the chain stays in one pair of hands. You approve the samples; we handle the cutting, the crating, the paperwork and the crossing.</p>
         </div>
-        <div class="bridge__stats reveal" data-delay="1">
-          <div class="stat"><b>3</b><span>Material families — stone, brick &amp; ceramic</span></div>
-          <div class="stat"><b>20<i>+</i></b><span>Stone, brick &amp; tile lines</span></div>
+        <div class="bridge__stats" data-anim="scale">
+          <div class="stat"><b data-count="3">0</b><span>Material families — stone, brick &amp; ceramic</span></div>
+          <div class="stat"><b data-count="20">0<i>+</i></b><span>Stone, brick &amp; tile lines</span></div>
           <div class="stat"><b>2–3<i>cm</i></b><span>Standard slab &amp; tile gauges</span></div>
           <div class="stat"><b>FCL<i>·</i>LCL</b><span>Container freight to Yerevan</span></div>
         </div>
       </div>
     </section>
 
+    <div class="wrap"><div class="vein"></div></div>
+
     <!-- ============================ COLLECTIONS ============================ -->
     <section class="section" id="collections">
       <div class="wrap">
-        <div class="section-head reveal">
-          <span class="eyebrow">The catalogue</span>
-          <h2 class="h2">Three collections, each its own discipline.</h2>
-          <p class="lede">Browse by material. Every line is photographed, specified and graded — open a collection to see varieties, finishes, formats and where each one belongs on a build.</p>
+        <div class="section-head">
+          <span class="eyebrow" data-anim="up">The catalogue</span>
+          <h2 class="h2" data-anim="up">Three collections, each its own discipline.</h2>
+          <p class="lede" data-anim="up">Browse by material. Every line is photographed, specified and graded — open a collection to see varieties, finishes, formats and where each one belongs on a build.</p>
         </div>
         <div class="collections">
-          <a class="coll reveal" href="collection-stone.html">
-            <img src="assets/img/r-grey-marble.jpg" alt="Polished marble slabs standing in the yard" />
+          <a class="coll" href="collection-stone.html" data-anim="up">
+            <picture>
+              <source type="image/avif" srcset="assets/img/opt/r-grey-marble-600.avif 600w, assets/img/opt/r-grey-marble.avif 1000w" sizes="(max-width:760px) 100vw, 33vw" />
+              <source type="image/webp" srcset="assets/img/opt/r-grey-marble-600.webp 600w, assets/img/opt/r-grey-marble.webp 1000w" sizes="(max-width:760px) 100vw, 33vw" />
+              <img src="assets/img/r-grey-marble.jpg" width="1000" height="750" loading="lazy" decoding="async" alt="Polished marble slabs standing in the yard" />
+            </picture>
             <span class="coll__num">01 — Natural Stone</span>
             <h3 class="coll__title">Marble, Onyx &amp; More</h3>
-            <p class="coll__desc">Golden onyx, green, grey and white marble, cream lime stone, quartzite and basalt — real slabs in stock, cut to slab or tile.</p>
+            <p class="coll__desc">Golden onyx, green, grey and white marble, cream limestone, quartzite and basalt — real slabs in stock, cut to slab or tile.</p>
             <span class="coll__more textlink">Open collection →</span>
           </a>
-          <a class="coll reveal" data-delay="1" href="collection-bricks.html">
-            <img src="assets/img/cat-brick.jpg" alt="Stacked pallets of clay facing brick" />
+          <a class="coll" href="collection-bricks.html" data-anim="up">
+            <picture>
+              <source type="image/avif" srcset="assets/img/opt/cat-brick-760.avif 760w, assets/img/opt/cat-brick.avif 1200w" sizes="(max-width:760px) 100vw, 33vw" />
+              <source type="image/webp" srcset="assets/img/opt/cat-brick-760.webp 760w, assets/img/opt/cat-brick.webp 1200w" sizes="(max-width:760px) 100vw, 33vw" />
+              <img src="assets/img/cat-brick.jpg" width="1600" height="1073" loading="lazy" decoding="async" alt="Stacked pallets of clay facing brick" />
+            </picture>
             <span class="coll__num">02 — Brick</span>
             <h3 class="coll__title">Clay Facing &amp; Glazed</h3>
             <p class="coll__desc">Frost-resistant facing brick, thin slips and glazed engineering brick in a full range of earth tones.</p>
             <span class="coll__more textlink">Open collection →</span>
           </a>
-          <a class="coll reveal" data-delay="2" href="collection-ceramics.html">
-            <img src="assets/img/v-teaser.jpg" alt="Veronzo Azul blue marble-look porcelain slab" />
+          <a class="coll" href="collection-ceramics.html" data-anim="up">
+            <picture>
+              <source type="image/avif" srcset="assets/img/opt/v-teaser-520.avif 520w, assets/img/opt/v-teaser.avif 860w" sizes="(max-width:760px) 100vw, 33vw" />
+              <source type="image/webp" srcset="assets/img/opt/v-teaser-520.webp 520w, assets/img/opt/v-teaser.webp 860w" sizes="(max-width:760px) 100vw, 33vw" />
+              <img src="assets/img/v-teaser.jpg" width="853" height="1179" loading="lazy" decoding="async" alt="Veronzo Azul blue marble-look porcelain slab" />
+            </picture>
             <span class="coll__num">03 — Porcelain</span>
             <h3 class="coll__title">Veronzo Porcelain</h3>
             <p class="coll__desc">The full Veronzo collection — marble, stone and concrete looks in large-format rectified porcelain. 100+ designs to download.</p>
@@ -125,21 +155,27 @@
       </div>
     </section>
 
-    <svg class="vein" viewBox="0 0 1200 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0,20 C200,6 300,34 480,20 S820,4 1200,22"/><path class="v-amber" d="M0,25 C220,40 320,10 520,26 S880,40 1200,17"/></svg>
+    <div class="wrap"><div class="vein"></div></div>
 
     <!-- ============================ FEATURED MATERIALS ============================ -->
     <section class="section section--tight">
       <div class="wrap">
-        <div class="section-head reveal">
-          <span class="eyebrow">Selected lines</span>
-          <h2 class="h2">A look at the data sheet.</h2>
-          <p class="lede">Every material in our catalogue carries the same spec card — origin, finish, formats and where it works. Here are six to start with.</p>
+        <div class="section-head">
+          <span class="eyebrow" data-anim="up">Selected lines</span>
+          <h2 class="h2" data-anim="up">A look at the data sheet.</h2>
+          <p class="lede" data-anim="up">Every material in our catalogue carries the same spec card — origin, finish, formats and where it works. Here are six to start with.</p>
         </div>
         <div class="materials">
 
           <!-- Golden Onyx -->
-          <article class="matcard reveal">
-            <div class="matcard__media"><span class="matcard__tag">Onyx</span><img src="assets/img/r-golden-onyx.jpg" alt="Vein-cut golden onyx slab with honey banding" /></div>
+          <article class="matcard" data-anim="up">
+            <div class="matcard__media"><span class="matcard__tag">Onyx</span>
+              <picture>
+                <source type="image/avif" srcset="assets/img/opt/r-golden-onyx-600.avif 600w, assets/img/opt/r-golden-onyx.avif 1000w" sizes="(max-width:1080px) 100vw, 45vw" />
+                <source type="image/webp" srcset="assets/img/opt/r-golden-onyx-600.webp 600w, assets/img/opt/r-golden-onyx.webp 1000w" sizes="(max-width:1080px) 100vw, 45vw" />
+                <img src="assets/img/r-golden-onyx.jpg" width="1000" height="750" loading="lazy" decoding="async" alt="Vein-cut golden onyx slab with honey banding" />
+              </picture>
+            </div>
             <div class="matcard__body">
               <h3 class="matcard__name">Golden Onyx<small>Vein-cut · translucent · backlit grade</small></h3>
               <p class="matcard__desc">The showpiece of the yard. Translucent honey-and-amber banding that glows when lit from behind — reserved for reception walls, bar fronts and luxury baths.</p>
@@ -153,8 +189,14 @@
           </article>
 
           <!-- Green Marble -->
-          <article class="matcard reveal" data-delay="1">
-            <div class="matcard__media"><span class="matcard__tag">Marble</span><img src="assets/img/r-green-marble.jpg" alt="Sage green marble slab with golden veining" /></div>
+          <article class="matcard" data-anim="up">
+            <div class="matcard__media"><span class="matcard__tag">Marble</span>
+              <picture>
+                <source type="image/avif" srcset="assets/img/opt/r-green-marble-600.avif 600w, assets/img/opt/r-green-marble.avif 1000w" sizes="(max-width:1080px) 100vw, 45vw" />
+                <source type="image/webp" srcset="assets/img/opt/r-green-marble-600.webp 600w, assets/img/opt/r-green-marble.webp 1000w" sizes="(max-width:1080px) 100vw, 45vw" />
+                <img src="assets/img/r-green-marble.jpg" width="1000" height="750" loading="lazy" decoding="async" alt="Sage green marble slab with golden veining" />
+              </picture>
+            </div>
             <div class="matcard__body">
               <h3 class="matcard__name">Green Marble<small>Sage &amp; jade · golden vein</small></h3>
               <p class="matcard__desc">A soft sage-and-jade marble shot with warm golden veins. Colour with real depth — for feature walls, floors and vanity tops that want character without drama.</p>
@@ -167,27 +209,18 @@
             </div>
           </article>
 
-          <!-- Grey Marble -->
-          <article class="matcard reveal" data-delay="2">
-            <div class="matcard__media"><span class="matcard__tag">Marble</span><img src="assets/img/r-grey-marble.jpg" alt="Polished grey marble slabs" /></div>
-            <div class="matcard__body">
-              <h3 class="matcard__name">Grey &amp; White Marble<small>Even tone · soft movement</small></h3>
-              <p class="matcard__desc">The dependable all-rounders: calm grey and bright cream-white marble that read as one tone across a large floor or wall, then reward a closer look.</p>
-              <div class="spec">
-                <div class="spec__row"><span class="spec__k">Origin</span><span class="spec__v">Iran</span></div>
-                <div class="spec__row"><span class="spec__k">Finish</span><span class="spec__v">Polished · Honed</span></div>
-                <div class="spec__row"><span class="spec__k">Format</span><span class="spec__v">Slabs · Tile · Cut-to-size</span></div>
-                <div class="spec__row"><span class="spec__k">Use</span><span class="spec__v">Floors · Walls · Stairs</span></div>
-              </div>
+          <!-- Clay brick (wide) -->
+          <article class="matcard matcard--wide" data-anim="up">
+            <div class="matcard__media"><span class="matcard__tag">Brick</span>
+              <picture>
+                <source type="image/avif" srcset="assets/img/opt/brick-facing-700.avif 700w, assets/img/opt/brick-facing.avif 1100w" sizes="(max-width:1080px) 100vw, 42vw" />
+                <source type="image/webp" srcset="assets/img/opt/brick-facing-700.webp 700w, assets/img/opt/brick-facing.webp 1100w" sizes="(max-width:1080px) 100vw, 42vw" />
+                <img src="assets/img/brick-facing.jpg" width="1100" height="1100" loading="lazy" decoding="async" alt="Clay facing brick wall, red to sand tones" />
+              </picture>
             </div>
-          </article>
-
-          <!-- Clay brick -->
-          <article class="matcard reveal">
-            <div class="matcard__media matcard--wide"><span class="matcard__tag">Brick</span><img src="assets/img/brick-facing.jpg" alt="Clay facing brick wall, red to sand tones" /></div>
             <div class="matcard__body">
               <h3 class="matcard__name">Clay Facing Brick<small>Extruded &amp; handmade</small></h3>
-              <p class="matcard__desc">Frost-resistant facade brick in a natural spread from deep red to sand. Standard, Roman and thin-slip formats.</p>
+              <p class="matcard__desc">Frost-resistant facade brick in a natural spread from deep red to sand. Standard, Roman and thin-slip formats, blended to your sample so a whole elevation reads as one batch.</p>
               <div class="spec">
                 <div class="spec__row"><span class="spec__k">Origin</span><span class="spec__v">Iran (kiln-fired)</span></div>
                 <div class="spec__row"><span class="spec__k">Format</span><span class="spec__v">Standard · Roman · Slip</span></div>
@@ -198,8 +231,14 @@
           </article>
 
           <!-- Glazed ceramic -->
-          <article class="matcard reveal" data-delay="1">
-            <div class="matcard__media matcard--wide"><span class="matcard__tag matcard__tag--teal">Ceramic</span><img src="assets/img/ceramic-glazed.jpg" alt="Glossy turquoise and teal glazed ceramic tile" /></div>
+          <article class="matcard" data-anim="up">
+            <div class="matcard__media"><span class="matcard__tag matcard__tag--teal">Ceramic</span>
+              <picture>
+                <source type="image/avif" srcset="assets/img/opt/ceramic-glazed-700.avif 700w, assets/img/opt/ceramic-glazed.avif 1100w" sizes="(max-width:1080px) 100vw, 45vw" />
+                <source type="image/webp" srcset="assets/img/opt/ceramic-glazed-700.webp 700w, assets/img/opt/ceramic-glazed.webp 1100w" sizes="(max-width:1080px) 100vw, 45vw" />
+                <img src="assets/img/ceramic-glazed.jpg" width="1100" height="1100" loading="lazy" decoding="async" alt="Glossy turquoise and teal glazed ceramic tile" />
+              </picture>
+            </div>
             <div class="matcard__body">
               <h3 class="matcard__name">Glazed Wall Tile<small>Persian &amp; Armenian patterns</small></h3>
               <p class="matcard__desc">High-gloss glazed ceramic in turquoise and teal — the colour line that ties Persian tilework to Armenian craft.</p>
@@ -212,9 +251,36 @@
             </div>
           </article>
 
-          <!-- Veronzo Porcelain -->
-          <article class="matcard reveal" data-delay="2">
-            <div class="matcard__media matcard--wide"><span class="matcard__tag matcard__tag--teal">Porcelain</span><img src="assets/img/v-hero.jpg" alt="Veronzo Volcan black and gold marble-look porcelain" /></div>
+          <!-- Cream Limestone -->
+          <article class="matcard" data-anim="up">
+            <div class="matcard__media"><span class="matcard__tag">Limestone</span>
+              <picture>
+                <source type="image/avif" srcset="assets/img/opt/r-lime-stone-600.avif 600w, assets/img/opt/r-lime-stone.avif 900w" sizes="(max-width:1080px) 100vw, 45vw" />
+                <source type="image/webp" srcset="assets/img/opt/r-lime-stone-600.webp 600w, assets/img/opt/r-lime-stone.webp 900w" sizes="(max-width:1080px) 100vw, 45vw" />
+                <img src="assets/img/r-lime-stone.jpg" width="900" height="1200" loading="lazy" decoding="async" alt="Cream limestone slab with a soft even tone" />
+              </picture>
+            </div>
+            <div class="matcard__body">
+              <h3 class="matcard__name">Cream Limestone<small>Soft matte · even bed</small></h3>
+              <p class="matcard__desc">A calm, sand-cream limestone with a quiet even bed — the warm neutral for floors, courtyards and façades that should feel grounded, not glossy.</p>
+              <div class="spec">
+                <div class="spec__row"><span class="spec__k">Origin</span><span class="spec__v">Iran</span></div>
+                <div class="spec__row"><span class="spec__k">Finish</span><span class="spec__v">Honed · Brushed · Tumbled</span></div>
+                <div class="spec__row"><span class="spec__k">Format</span><span class="spec__v">Slab · Tile · Pavers</span></div>
+                <div class="spec__row"><span class="spec__k">Use</span><span class="spec__v">Floors · Façades · Outdoor</span></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Veronzo Porcelain (wide) -->
+          <article class="matcard matcard--wide" data-anim="up">
+            <div class="matcard__media"><span class="matcard__tag matcard__tag--teal">Porcelain</span>
+              <picture>
+                <source type="image/avif" srcset="assets/img/opt/v-hero-760.avif 760w, assets/img/opt/v-hero.avif 1200w" sizes="(max-width:1080px) 100vw, 58vw" />
+                <source type="image/webp" srcset="assets/img/opt/v-hero-760.webp 760w, assets/img/opt/v-hero.webp 1200w" sizes="(max-width:1080px) 100vw, 58vw" />
+                <img src="assets/img/v-hero.jpg" width="1600" height="1381" loading="lazy" decoding="async" alt="Veronzo black and gold marble-look porcelain" />
+              </picture>
+            </div>
             <div class="matcard__body">
               <h3 class="matcard__name">Veronzo Porcelain<small>Marble-look porcelain · large format</small></h3>
               <p class="matcard__desc">The full Veronzo collection — marble, stone and concrete looks in large-format rectified porcelain, with the water absorption and traffic rating real stone can't match. Over 100 designs to browse and download.</p>
@@ -228,38 +294,46 @@
           </article>
 
         </div>
-        <div class="center mt-l reveal"><a class="btn btn--ghost" href="collection-stone.html">See the full catalogue <span class="arrow">→</span></a></div>
+        <div class="center mt-l" data-anim="up"><a class="btn btn--ghost" href="collection-stone.html">See the full catalogue <span class="arrow">→</span></a></div>
       </div>
     </section>
 
-    <!-- ============================ ONYX FEATURE ============================ -->
+    <!-- ============================ ONYX FEATURE (light sweep) ============================ -->
     <section class="section--tight wrap">
-      <div class="feature reveal">
-        <div class="feature__media"><img src="assets/img/r-golden-onyx-2.jpg" alt="A large golden onyx slab with translucent honey banding" /></div>
+      <div class="feature">
+        <div class="feature__media" data-anim="scale">
+          <picture>
+            <source type="image/avif" srcset="assets/img/opt/r-golden-onyx-2-600.avif 600w, assets/img/opt/r-golden-onyx-2.avif 1000w" sizes="(max-width:1080px) 100vw, 55vw" />
+            <source type="image/webp" srcset="assets/img/opt/r-golden-onyx-2-600.webp 600w, assets/img/opt/r-golden-onyx-2.webp 1000w" sizes="(max-width:1080px) 100vw, 55vw" />
+            <img src="assets/img/r-golden-onyx-2.jpg" width="1000" height="750" loading="lazy" decoding="async" alt="A large golden onyx slab with translucent honey banding" />
+          </picture>
+        </div>
         <div class="feature__body">
-          <span class="eyebrow">The material does the talking</span>
-          <h3 class="h3">Stone you can light from behind.</h3>
-          <p class="lede">Onyx is where our catalogue earns its keep. Translucent, layered and quietly theatrical, a backlit panel turns a reception desk or a bathroom wall into the reason people remember the room.</p>
-          <p style="color:var(--on-dark-soft)">We supply it the way it should be handled — resin-backed for strength, bookmatched for symmetry, and sampled against your lighting before a single slab ships.</p>
-          <div><a class="textlink" href="collection-stone.html#golden-onyx">Explore onyx &amp; marble →</a></div>
+          <span class="eyebrow" data-anim="up">The material does the talking</span>
+          <h3 class="h3" data-anim="up">Stone you can light from behind.</h3>
+          <p class="lede" data-anim="up">Onyx is where our catalogue earns its keep. Translucent, layered and quietly theatrical, a backlit panel turns a reception desk or a bathroom wall into the reason people remember the room.</p>
+          <p data-anim="up" style="color:var(--ivory-soft)">We supply it the way it should be handled — resin-backed for strength, bookmatched for symmetry, and sampled against your lighting before a single slab ships.</p>
+          <div data-anim="up" style="margin-top:18px"><a class="textlink" href="collection-stone.html#golden-onyx">Explore onyx &amp; marble →</a></div>
         </div>
       </div>
     </section>
 
-    <!-- ============================ PROCESS ============================ -->
-    <section class="section dark">
+    <div class="wrap"><div class="vein"></div></div>
+
+    <!-- ============================ PROCESS / THE ROUTE ============================ -->
+    <section class="section">
       <div class="wrap">
-        <div class="section-head reveal">
-          <span class="eyebrow">Quarry to site</span>
-          <h2 class="h2">How an order reaches Yerevan.</h2>
-          <p class="lede">Five steps, one supplier. The sequence is the same whether you order a single pallet of brick or a container of bookmatched slabs.</p>
+        <div class="section-head">
+          <span class="eyebrow" data-anim="up">Quarry to site</span>
+          <h2 class="h2" data-anim="up">How an order reaches Yerevan.</h2>
+          <p class="lede" data-anim="up">Five steps, one supplier. The sequence is the same whether you order a single pallet of brick or a container of bookmatched slabs.</p>
         </div>
         <div class="steps">
-          <div class="step reveal"><span class="step__n">01</span><h4 class="step__t">Source</h4><p class="step__d">Blocks and batches selected direct from quarries and kilns across Iran — Khorasan, Yazd, Isfahan, Fars and beyond.</p></div>
-          <div class="step reveal" data-delay="1"><span class="step__n">02</span><h4 class="step__t">Fabricate</h4><p class="step__d">Cut, calibrated and finished to your spec — slab gauge, tile format, finish and edge — sampled and approved first.</p></div>
-          <div class="step reveal" data-delay="2"><span class="step__n">03</span><h4 class="step__t">Inspect</h4><p class="step__d">Each consignment graded, photographed and labelled by block and shade, so what you approve is what arrives.</p></div>
-          <div class="step reveal" data-delay="3"><span class="step__n">04</span><h4 class="step__t">Export</h4><p class="step__d">Crated, palletised and documented — invoice, certificate of origin, packing list — on FCL or consolidated LCL freight.</p></div>
-          <div class="step reveal" data-delay="3"><span class="step__n">05</span><h4 class="step__t">Deliver</h4><p class="step__d">Customs cleared at the Armenian border and delivered to your yard, showroom or site in Yerevan and across the country.</p></div>
+          <div class="step" data-anim="up"><span class="step__n">01</span><h4 class="step__t">Source</h4><p class="step__d">Blocks and batches selected direct from quarries and kilns across Iran — Khorasan, Yazd, Isfahan, Fars and beyond.</p></div>
+          <div class="step" data-anim="up"><span class="step__n">02</span><h4 class="step__t">Fabricate</h4><p class="step__d">Cut, calibrated and finished to your spec — slab gauge, tile format, finish and edge — sampled and approved first.</p></div>
+          <div class="step" data-anim="up"><span class="step__n">03</span><h4 class="step__t">Inspect</h4><p class="step__d">Each consignment graded, photographed and labelled by block and shade, so what you approve is what arrives.</p></div>
+          <div class="step" data-anim="up"><span class="step__n">04</span><h4 class="step__t">Export</h4><p class="step__d">Crated, palletised and documented — invoice, certificate of origin, packing list — on FCL or consolidated LCL freight.</p></div>
+          <div class="step" data-anim="up"><span class="step__n">05</span><h4 class="step__t">Deliver</h4><p class="step__d">Customs cleared at the Armenian border and delivered to your yard, showroom or site in Yerevan and across the country.</p></div>
         </div>
       </div>
     </section>
@@ -267,97 +341,119 @@
     <!-- ============================ STOCK GALLERY PREVIEW ============================ -->
     <section class="section" id="projects">
       <div class="wrap">
-        <div class="section-head reveal">
-          <span class="eyebrow">Stock gallery</span>
-          <h2 class="h2">Real slabs, in the yard now.</h2>
-          <p class="lede">Every photo here is an actual block in stock, not a render. Browse by type and reserve the exact slab — we label it in your name and ship that one to Yerevan.</p>
+        <div class="section-head">
+          <span class="eyebrow" data-anim="up">Stock gallery</span>
+          <h2 class="h2" data-anim="up">Real slabs, in the yard now.</h2>
+          <p class="lede" data-anim="up">Every photo here is an actual block in stock, not a render. Browse by type and reserve the exact slab — we label it in your name and ship that one to Yerevan.</p>
         </div>
         <div class="projects">
-          <a class="project project--lg reveal" href="projects.html#onyx">
-            <img src="assets/img/g-onyx-1.jpg" alt="Golden onyx slab in the yard" />
+          <a class="project project--lg" href="projects.html#onyx" data-anim="scale">
+            <picture>
+              <source type="image/avif" srcset="assets/img/opt/g-onyx-1-520.avif 520w, assets/img/opt/g-onyx-1.avif 820w" sizes="(max-width:760px) 50vw, 50vw" />
+              <source type="image/webp" srcset="assets/img/opt/g-onyx-1-520.webp 520w, assets/img/opt/g-onyx-1.webp 820w" sizes="(max-width:760px) 50vw, 50vw" />
+              <img src="assets/img/g-onyx-1.jpg" width="820" height="615" loading="lazy" decoding="async" alt="Golden onyx slab in the yard" />
+            </picture>
             <span class="project__kicker">Statement stone</span>
             <h3 class="project__title">Golden Onyx</h3>
             <div class="project__mats"><span class="chip">Vein-cut</span><span class="chip">Backlit grade</span></div>
           </a>
-          <a class="project project--sm reveal" data-delay="1" href="projects.html#green">
-            <img src="assets/img/g-green-1.jpg" alt="Green marble slab in the yard" />
+          <a class="project project--sm" href="projects.html#green" data-anim="scale">
+            <picture>
+              <source type="image/avif" srcset="assets/img/opt/g-green-1-520.avif 520w, assets/img/opt/g-green-1.avif 820w" sizes="(max-width:760px) 50vw, 50vw" />
+              <source type="image/webp" srcset="assets/img/opt/g-green-1-520.webp 520w, assets/img/opt/g-green-1.webp 820w" sizes="(max-width:760px) 50vw, 50vw" />
+              <img src="assets/img/g-green-1.jpg" width="820" height="615" loading="lazy" decoding="async" alt="Green marble slab in the yard" />
+            </picture>
             <span class="project__kicker">Colour with depth</span>
             <h3 class="project__title">Green Marble</h3>
             <div class="project__mats"><span class="chip">Sage &amp; gold vein</span></div>
           </a>
-          <a class="project project--third reveal" href="projects.html#dark">
-            <img src="assets/img/g-bw-1.jpg" alt="Black and white veined marble slab" />
+          <a class="project project--third" href="projects.html#dark" data-anim="scale">
+            <picture>
+              <source type="image/avif" srcset="assets/img/opt/g-bw-1-520.avif 520w, assets/img/opt/g-bw-1.avif 820w" sizes="(max-width:760px) 50vw, 33vw" />
+              <source type="image/webp" srcset="assets/img/opt/g-bw-1-520.webp 520w, assets/img/opt/g-bw-1.webp 820w" sizes="(max-width:760px) 50vw, 33vw" />
+              <img src="assets/img/g-bw-1.jpg" width="820" height="615" loading="lazy" decoding="async" alt="Black and white veined marble slab" />
+            </picture>
             <span class="project__kicker">High contrast</span>
             <h3 class="project__title">Black &amp; White Marble</h3>
             <div class="project__mats"><span class="chip">Bookmatch grade</span></div>
           </a>
-          <a class="project project--third reveal" data-delay="1" href="projects.html#grey">
-            <img src="assets/img/g-grey-1.jpg" alt="Grey marble slabs in the yard" />
+          <a class="project project--third" href="projects.html#grey" data-anim="scale">
+            <picture>
+              <source type="image/avif" srcset="assets/img/opt/g-grey-1-520.avif 520w, assets/img/opt/g-grey-1.avif 820w" sizes="(max-width:760px) 50vw, 33vw" />
+              <source type="image/webp" srcset="assets/img/opt/g-grey-1-520.webp 520w, assets/img/opt/g-grey-1.webp 820w" sizes="(max-width:760px) 50vw, 33vw" />
+              <img src="assets/img/g-grey-1.jpg" width="820" height="615" loading="lazy" decoding="async" alt="Grey marble slabs in the yard" />
+            </picture>
             <span class="project__kicker">All-rounder</span>
             <h3 class="project__title">Grey Marble</h3>
             <div class="project__mats"><span class="chip">Even tone</span></div>
           </a>
-          <a class="project project--third reveal" data-delay="2" href="projects.html#white">
-            <img src="assets/img/g-white-1.jpg" alt="White marble slab in the yard" />
+          <a class="project project--third" href="projects.html#white" data-anim="scale">
+            <picture>
+              <source type="image/avif" srcset="assets/img/opt/g-white-1-520.avif 520w, assets/img/opt/g-white-1.avif 820w" sizes="(max-width:760px) 50vw, 33vw" />
+              <source type="image/webp" srcset="assets/img/opt/g-white-1-520.webp 520w, assets/img/opt/g-white-1.webp 820w" sizes="(max-width:760px) 50vw, 33vw" />
+              <img src="assets/img/g-white-1.jpg" width="820" height="615" loading="lazy" decoding="async" alt="White marble slab in the yard" />
+            </picture>
             <span class="project__kicker">Light &amp; calm</span>
             <h3 class="project__title">White &amp; Cream</h3>
             <div class="project__mats"><span class="chip">Marble</span><span class="chip">Travertine</span></div>
           </a>
         </div>
-        <div class="center mt-l reveal"><a class="btn btn--ghost" href="projects.html">Open the full stock gallery <span class="arrow">→</span></a></div>
+        <div class="center mt-l" data-anim="up"><a class="btn btn--ghost" href="projects.html">Open the full stock gallery <span class="arrow">→</span></a></div>
       </div>
     </section>
 
+    <div class="wrap"><div class="vein"></div></div>
+
     <!-- ============================ ABOUT / VALUES ============================ -->
-    <section class="section dark" id="about">
+    <section class="section" id="about">
       <div class="wrap">
-        <div class="section-head reveal">
-          <span class="eyebrow">About Adonis Co</span>
-          <h2 class="h2">A trading house built on one short border.</h2>
-          <p class="lede">Adonis Co is a materials export business working the route between Iran and Armenia. We exist because the two countries are neighbours, and the best Persian stone, brick and ceramic should reach Armenian sites without passing through three sets of hands and three markups.</p>
+        <div class="section-head">
+          <span class="eyebrow" data-anim="up">About Adonis Co</span>
+          <h2 class="h2" data-anim="up">A trading house built on one short border.</h2>
+          <p class="lede" data-anim="up">Adonis Co is a materials export business working the route between Iran and Armenia. We exist because the two countries are neighbours, and the best Persian stone, brick and ceramic should reach Armenian sites without passing through three sets of hands and three markups.</p>
         </div>
         <div class="values">
-          <div class="value reveal"><h4>Quarry-direct pricing</h4><p>We buy at source, by the container, and sell the same way. The block, the kiln batch and your invoice sit close together — no layer of resellers in between.</p></div>
-          <div class="value reveal" data-delay="1"><h4>Specified, not guessed</h4><p>Samples, finishes and gauges are approved before production. Veining and shade are matched batch to batch, so the second container looks like the first.</p></div>
-          <div class="value reveal" data-delay="2"><h4>One supplier, three trades</h4><p>Stone, brick and ceramic on a single order, a single shipment and a single point of contact — from the quarry face to your gate in Yerevan.</p></div>
+          <div class="value" data-anim="up"><h4>Quarry-direct pricing</h4><p>We buy at source, by the container, and sell the same way. The block, the kiln batch and your invoice sit close together — no layer of resellers in between.</p></div>
+          <div class="value" data-anim="up"><h4>Specified, not guessed</h4><p>Samples, finishes and gauges are approved before production. Veining and shade are matched batch to batch, so the second container looks like the first.</p></div>
+          <div class="value" data-anim="up"><h4>One supplier, three trades</h4><p>Stone, brick and ceramic on a single order, a single shipment and a single point of contact — from the quarry face to your gate in Yerevan.</p></div>
         </div>
       </div>
     </section>
 
     <!-- ============================ CONTACT ============================ -->
-    <section class="section dark" id="contact" style="background:var(--ink-2)">
+    <section class="section" id="contact">
       <div class="wrap contact">
-        <div class="reveal">
-          <span class="eyebrow">Get in touch</span>
-          <h2 class="h2" style="margin-top:16px">Tell us what you're building.</h2>
-          <p class="lede" style="margin-top:18px">Send the material, the rough quantity and where it's going. We'll come back with samples, lead time and a price by the container or pallet.</p>
+        <div>
+          <span class="eyebrow" data-anim="up">Get in touch</span>
+          <h2 class="h2" data-anim="up" style="margin-top:16px">Tell us what you're building.</h2>
+          <p class="lede" data-anim="up" style="margin-top:18px">Send the material, the rough quantity and where it's going. We'll come back with samples, lead time and a price by the container or pallet.</p>
           <div class="contact__lines">
-            <div class="cline">
+            <div class="cline" data-anim="up">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
               <div><b>Showroom · Armenia</b><span>Yerevan, Armenia <em style="opacity:.6">(address — to add)</em></span></div>
             </div>
-            <div class="cline">
+            <div class="cline" data-anim="up">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L20 13l1 4v2a2 2 0 0 1-2 2A16 16 0 0 1 3 7a2 2 0 0 1 2-3Z"/></svg>
               <div><b>Phone · WhatsApp</b><a href="tel:+374">+374 00 000 000</a> <span style="opacity:.55">/ +98 000 000 0000</span></div>
             </div>
-            <div class="cline">
+            <div class="cline" data-anim="up">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
               <div><b>Email</b><a href="mailto:info@adonisco.am">info@adonisco.am</a></div>
             </div>
-            <div class="cline">
+            <div class="cline" data-anim="up">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
               <div><b>Instagram</b><a href="https://www.instagram.com/adonisco.am" target="_blank" rel="noopener">@adonisco.am</a></div>
             </div>
           </div>
         </div>
 
-        <form class="form reveal" data-delay="1" data-quote-form data-to="sales@adonisco.am">
+        <form class="form" data-anim="up" data-quote-form data-to="info@adonisco.am">
           <div class="form__row">
-            <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" required placeholder="Your name" /></div>
-            <div class="field"><label for="company">Company</label><input id="company" name="company" type="text" placeholder="Company / studio" /></div>
+            <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" required placeholder="Your name" autocomplete="name" /></div>
+            <div class="field"><label for="company">Company</label><input id="company" name="company" type="text" placeholder="Company / studio" autocomplete="organization" /></div>
           </div>
           <div class="form__row">
-            <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required placeholder="you@email.com" /></div>
+            <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required placeholder="you@email.com" autocomplete="email" /></div>
             <div class="field"><label for="material">Material</label>
               <select id="material" name="material">
                 <option>Natural stone — marble</option>
@@ -385,7 +481,7 @@
     <div class="wrap">
       <div class="footer__top">
         <div>
-          <a class="brand" href="index.html"><b>Adonis</b><span class="co" style="color:var(--amber)">Co.</span></a>
+          <a class="brand" href="index.html"><b>Adonis</b><span class="co">Co<span class="dot">.</span></span></a>
           <p class="footer__about">Natural stone, brick and ceramic — exported from Iran to Armenia. Quarry-direct, finished to spec, delivered to Yerevan.</p>
         </div>
         <div>
@@ -400,18 +496,18 @@
         <div>
           <h5>Company</h5>
           <ul>
-            <li><a href="index.html#about">About</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
-            <li><a href="index.html#collections">How it works</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#collections">How it works</a></li>
             <li><a href="https://www.instagram.com/adonisco.am" target="_blank" rel="noopener">Instagram</a></li>
           </ul>
         </div>
         <div>
           <h5>Trade</h5>
           <ul>
-            <li><a href="index.html#contact">Request a quote</a></li>
-            <li><a href="index.html#contact">Samples</a></li>
-            <li><a href="index.html#contact">Container freight</a></li>
+            <li><a href="#contact">Request a quote</a></li>
+            <li><a href="#contact">Samples</a></li>
+            <li><a href="#contact">Container freight</a></li>
             <li><a href="mailto:info@adonisco.am">info@adonisco.am</a></li>
           </ul>
         </div>
@@ -430,6 +526,9 @@
     </div>
   </footer>
 
-  <script src="assets/js/main.js"></script>
+  <script src="assets/js/vendor/gsap.min.js" defer></script>
+  <script src="assets/js/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="assets/js/vendor/lenis.min.js" defer></script>
+  <script src="assets/js/cinematic.js" defer></script>
 </body>
 </html>
