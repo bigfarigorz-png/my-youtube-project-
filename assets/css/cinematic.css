@@ -211,10 +211,10 @@ h1, h2, h3, h4 {
 .brand .co { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--honey); transform: translateY(-4px); }
 .brand .dot { color: var(--honey); }
 
-.nav-links { display: flex; align-items: center; gap: 30px; list-style: none; }
+.nav-links { display: flex; align-items: center; gap: 21px; list-style: none; }
 .nav-links a {
-  font-family: var(--mono); font-size: 0.76rem; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--ivory-soft); position: relative; padding-block: 6px; transition: color 0.3s;
+  font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ivory-soft); position: relative; padding-block: 6px; transition: color 0.3s; white-space: nowrap;
 }
 .nav-links a::after { content: ""; position: absolute; left: 0; bottom: 0; height: 1px; width: 0; background: var(--honey); transition: width 0.35s var(--ease); }
 .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--ivory); }
@@ -294,9 +294,9 @@ h1, h2, h3, h4 {
 .stat span { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ivory-dim); display: block; margin-top: 12px; line-height: 1.5; }
 
 /* ---- Collections -------------------------------------------------------- */
-.collections { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.collections { display: grid; grid-template-columns: repeat(auto-fit, minmax(265px, 1fr)); gap: 18px; }
 .coll {
-  position: relative; min-height: clamp(420px, 52vw, 600px);
+  position: relative; min-height: clamp(380px, 34vw, 480px);
   display: flex; flex-direction: column; justify-content: flex-end;
   padding: 30px; overflow: hidden; isolation: isolate; border-radius: var(--radius);
   border: 1px solid var(--line);
@@ -444,10 +444,11 @@ h1, h2, h3, h4 {
   .project--third { grid-column: span 2; }
   .footer__top { grid-template-columns: 1fr 1fr; }
 }
-@media (max-width: 760px) {
+/* Nav collapses to a drawer earlier (more catalogue items now) */
+@media (max-width: 1024px) {
   .nav-links {
     position: fixed; inset: 0 0 0 auto; width: min(82vw, 360px);
-    flex-direction: column; align-items: flex-start; justify-content: center; gap: 26px;
+    flex-direction: column; align-items: flex-start; justify-content: center; gap: 24px;
     background: var(--coal); border-left: 1px solid var(--line); padding: 40px;
     transform: translateX(100%); transition: transform 0.55s var(--ease); z-index: var(--z-nav);
   }
@@ -455,6 +456,8 @@ h1, h2, h3, h4 {
   .nav-links a { font-size: 1rem; }
   .nav-toggle { display: inline-flex; z-index: calc(var(--z-nav) + 1); }
   .nav-cta-desktop { display: none; }
+}
+@media (max-width: 760px) {
   .collections { grid-template-columns: 1fr; }
   .steps { grid-template-columns: 1fr 1fr; }
   .values { grid-template-columns: 1fr; }
@@ -905,3 +908,37 @@ h1, h2, h3, h4 {
   .catalog__grid { grid-template-columns: 1fr; }
   .profiles { gap: 20px; }
 }
+
+/* ==========================================================================
+   PRODUCT-ART PANELS — a lit dark plinth used where we present a product
+   by drawing rather than a photo. Keeps the gallery aesthetic consistent.
+   ========================================================================== */
+.prodart {
+  position: absolute; inset: 0; display: grid; place-items: center; overflow: hidden;
+  background:
+    radial-gradient(72% 62% at 50% 38%, rgba(224,162,78,0.20), transparent 70%),
+    linear-gradient(165deg, var(--ash) 0%, var(--coal) 60%, var(--void) 100%);
+}
+/* when used inside a normal-flow media box (not absolute) */
+.profile__media .prodart, .matcard__media .prodart, .feature__media .prodart,
+.coll .prodart, .project .prodart { position: absolute; inset: 0; z-index: -2; }
+.prodart::before {  /* faint vein streak */
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(115deg, transparent 40%, rgba(240,188,114,0.12) 50%, transparent 60%);
+}
+.prodart svg { position: relative; width: 42%; max-width: 150px; height: auto; color: var(--honey);
+  opacity: 0.92; filter: drop-shadow(0 8px 34px rgba(224,162,78,0.28)); stroke-width: 1.1; }
+.prodart__ghost {
+  position: absolute; right: 16px; bottom: 6px; z-index: 1;
+  font-family: var(--display); font-style: italic; font-weight: 380;
+  font-size: clamp(2.4rem, 6vw, 4.6rem); line-height: 1;
+  color: rgba(242, 235, 221, 0.05); letter-spacing: -0.02em; pointer-events: none;
+}
+.coll .prodart svg, .project .prodart svg { z-index: -1; }
+
+/* Roomy spec list used on appliance/structure detail blocks */
+.metric { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px;
+  background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; margin-top: 22px; }
+.metric div { background: var(--coal); padding: 18px 20px; }
+.metric b { display: block; font-family: var(--display); font-size: 1.5rem; color: var(--honey); font-weight: 500; line-height: 1; }
+.metric span { display: block; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ivory-dim); margin-top: 10px; }
