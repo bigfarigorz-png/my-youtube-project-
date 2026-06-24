@@ -1,8 +1,9 @@
 /* ============================================================
-   ATELIER MARCH — interactions
-   Preloader, custom cursor, scroll reveals, stat counters,
-   project filters, project modal, mobile menu, hero parallax.
-   Zero dependencies.
+   BAHAREH HAJIZADEH — interactions
+   Preloader, custom cursor, Lenis smooth scroll, GSAP scroll
+   effects, project filters, project modal, mobile menu.
+   Lenis + GSAP are CDN-loaded; all features degrade gracefully
+   if they fail or if prefers-reduced-motion is set.
    ============================================================ */
 
 (function () {
@@ -28,7 +29,6 @@
   if (preloader) {
     let progress = 0;
     const tick = setInterval(() => {
-      // Ease toward 90 while we wait for the real load event
       progress = Math.min(progress + Math.random() * 14, 90);
       counter.textContent = String(Math.floor(progress));
       if (progress >= 90) clearInterval(tick);
@@ -38,7 +38,6 @@
       clearInterval(tick);
       finishPreloader();
     });
-    // Hard fallback so the site is never trapped behind the loader
     setTimeout(finishPreloader, 4000);
   }
 
@@ -70,7 +69,6 @@
     document.addEventListener("mouseleave", () => cursor.classList.add("is-hidden"));
     document.addEventListener("mouseenter", () => cursor.classList.remove("is-hidden"));
 
-    // Grow over interactive elements; show a label over media
     document.addEventListener("mouseover", (e) => {
       const labelled = e.target.closest("[data-cursor-label]");
       const interactive = e.target.closest("[data-cursor], a, button");
@@ -93,20 +91,96 @@
   }
 
   /* ----------------------------------------------------------
-     Header state + hero parallax
+     Lenis smooth scroll + GSAP scroll-driven effects
+     All gated: only when libs are present AND motion is allowed.
+     Degrades to native scroll + inline parallax if either fails.
      ---------------------------------------------------------- */
+  let lenis = null;
   const header = document.getElementById("header");
-  const heroMedia = document.getElementById("heroMedia");
 
-  function onScroll() {
-    const y = window.scrollY;
-    header.classList.toggle("is-scrolled", y > 40);
-    if (heroMedia && !prefersReducedMotion && y < window.innerHeight * 1.2) {
-      heroMedia.style.transform = `translateY(${y * 0.22}px)`;
+  const useSmoothScroll =
+    !prefersReducedMotion &&
+    typeof Lenis !== "undefined" &&
+    typeof gsap !== "undefined" &&
+    typeof ScrollTrigger !== "undefined";
+
+  if (useSmoothScroll) {
+    lenis = new Lenis({
+      duration: 1.25,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+    });
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Wire Lenis RAF into GSAP ticker (single RAF loop)
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
+
+    // Drive header .is-scrolled from Lenis scroll position
+    lenis.on("scroll", ({ scroll }) => {
+      if (header) header.classList.toggle("is-scrolled", scroll > 40);
+    });
+
+    // Hero image parallax scrub (reverses on scroll-up)
+    const heroMedia = document.getElementById("heroMedia");
+    if (heroMedia) {
+      gsap.to(heroMedia, {
+        yPercent: 20,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".hero",
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
     }
+
+    // Quote band background parallax
+    const quoteMedia = document.querySelector(".quote__media");
+    if (quoteMedia) {
+      gsap.to(quoteMedia, {
+        yPercent: 14,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".quote",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+    }
+
+    // Route anchor clicks through Lenis for smooth landing
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+      link.addEventListener("click", (e) => {
+        const href = link.getAttribute("href");
+        if (href === "#") return;
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          lenis.scrollTo(target, { offset: -80, duration: 1.4 });
+        }
+      });
+    });
+
+  } else {
+    // Fallback: native scroll for header state + hero parallax
+    const heroMedia = document.getElementById("heroMedia");
+
+    function onScroll() {
+      const y = window.scrollY;
+      if (header) header.classList.toggle("is-scrolled", y > 40);
+      if (heroMedia && !prefersReducedMotion && y < window.innerHeight * 1.2) {
+        heroMedia.style.transform = `translateY(${y * 0.22}px)`;
+      }
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
   }
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
 
   /* ----------------------------------------------------------
      Mobile menu
@@ -114,24 +188,27 @@
   const burger = document.getElementById("burger");
   const mobileMenu = document.getElementById("mobileMenu");
 
-  function setMenu(open) {
-    burger.classList.toggle("is-open", open);
-    burger.setAttribute("aria-expanded", String(open));
-    burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-    mobileMenu.classList.toggle("is-open", open);
-    mobileMenu.setAttribute("aria-hidden", String(!open));
-    document.body.classList.toggle("modal-open", open);
+  if (burger && mobileMenu) {
+    function setMenu(open) {
+      burger.classList.toggle("is-open", open);
+      burger.setAttribute("aria-expanded", String(open));
+      burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      mobileMenu.classList.toggle("is-open", open);
+      mobileMenu.setAttribute("aria-hidden", String(!open));
+      document.body.classList.toggle("modal-open", open);
+      if (lenis) { open ? lenis.stop() : lenis.start(); }
+    }
+
+    burger.addEventListener("click", () =>
+      setMenu(!mobileMenu.classList.contains("is-open"))
+    );
+    mobileMenu.querySelectorAll("a").forEach((link) =>
+      link.addEventListener("click", () => setMenu(false))
+    );
   }
 
-  burger.addEventListener("click", () =>
-    setMenu(!mobileMenu.classList.contains("is-open"))
-  );
-  mobileMenu.querySelectorAll("a").forEach((link) =>
-    link.addEventListener("click", () => setMenu(false))
-  );
-
   /* ----------------------------------------------------------
-     Reveal on scroll (with sibling stagger)
+     Reveal on scroll (IntersectionObserver — one-shot entrance)
      ---------------------------------------------------------- */
   const revealEls = document.querySelectorAll(".reveal");
 
@@ -141,7 +218,6 @@
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
           const el = entry.target;
-          // Stagger elements that become visible in the same frame
           const siblings = [...el.parentElement.children].filter(
             (s) => s.classList.contains("reveal") && !s.classList.contains("is-visible")
           );
@@ -172,7 +248,7 @@
     const start = performance.now();
     (function frame(now) {
       const t = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - t, 3); // ease-out cubic
+      const eased = 1 - Math.pow(1 - t, 3);
       el.textContent = String(Math.round(target * eased));
       if (t < 1) requestAnimationFrame(frame);
     })(start);
@@ -210,7 +286,6 @@
         const show = filter === "all" || project.dataset.category === filter;
         project.classList.toggle("is-filtered", !show);
         if (show) {
-          // Re-run the entrance animation for the freshly shown set
           project.classList.remove("is-visible");
           requestAnimationFrame(() =>
             requestAnimationFrame(() => project.classList.add("is-visible"))
@@ -255,6 +330,7 @@
     modal.setAttribute("aria-hidden", "false");
     document.body.classList.add("modal-open");
     modal.querySelector(".modal__close").focus();
+    if (lenis) lenis.stop();
   }
 
   function closeModal() {
@@ -262,36 +338,37 @@
     modal.setAttribute("aria-hidden", "true");
     document.body.classList.remove("modal-open");
     if (lastFocused) lastFocused.focus();
+    if (lenis) lenis.start();
   }
 
   function capitalize(s) {
     return s ? s.charAt(0).toUpperCase() + s.slice(1) : "";
   }
 
-  projects.forEach((project) => {
-    project.addEventListener("click", () => openModal(project));
-    project.setAttribute("tabindex", "0");
-    project.setAttribute("role", "button");
-    project.setAttribute("aria-label", `Open project: ${project.dataset.title}`);
-    project.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        openModal(project);
-      }
+  if (modal) {
+    projects.forEach((project) => {
+      project.addEventListener("click", () => openModal(project));
+      project.setAttribute("tabindex", "0");
+      project.setAttribute("role", "button");
+      project.setAttribute("aria-label", `Open project: ${project.dataset.title}`);
+      project.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          openModal(project);
+        }
+      });
     });
-  });
 
-  modal.querySelectorAll("[data-close]").forEach((el) =>
-    el.addEventListener("click", closeModal)
-  );
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
-  });
+    modal.querySelectorAll("[data-close]").forEach((el) =>
+      el.addEventListener("click", closeModal)
+    );
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
+    });
+  }
 
   /* ----------------------------------------------------------
-     Contact form — submits via FormSubmit's AJAX endpoint so
-     the visitor never leaves the page; falls back to a classic
-     POST if the request can't go through.
+     Contact form — AJAX via FormSubmit, falls back to POST
      ---------------------------------------------------------- */
   const form = document.getElementById("contactForm");
   const formStatus = document.getElementById("formStatus");
@@ -316,7 +393,6 @@
         form.reset();
         formStatus.textContent = "Thank you — your message is on its way.";
       } catch {
-        // Let the browser do a normal POST instead
         form.submit();
         return;
       }
@@ -325,8 +401,7 @@
   }
 
   /* ----------------------------------------------------------
-     Testimonials slider — auto-advances, pauses on hover,
-     wraps around at the ends.
+     Testimonials slider — auto-advances, pauses on hover
      ---------------------------------------------------------- */
   const track = document.getElementById("testiTrack");
 
