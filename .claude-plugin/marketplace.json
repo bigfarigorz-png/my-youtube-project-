@@ -1,0 +1,12 @@
+{
+  "name": "bigfarigorz-plugins",
+  "description": "Reusable Claude Code skills packaged as plugins.",
+  "owner": { "name": "bigfarigorz" },
+  "plugins": [
+    {
+      "name": "video-to-website",
+      "source": "./plugins/video-to-website",
+      "description": "Turn a video into a premium scroll-driven animated website with GSAP, canvas frame rendering, and layered animation choreography."
+    }
+  ]
+}

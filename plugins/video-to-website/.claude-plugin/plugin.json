@@ -1,0 +1,7 @@
+{
+  "name": "video-to-website",
+  "version": "1.0.0",
+  "description": "Turn a video into a premium scroll-driven animated website with GSAP, canvas frame rendering, and layered animation choreography.",
+  "author": { "name": "bigfarigorz" },
+  "keywords": ["video", "website", "gsap", "scroll", "animation"]
+}
