@@ -45,7 +45,14 @@
   /* Scale */
   --container: 1280px;
   --gutter: clamp(20px, 5vw, 72px);
-  --radius: 3px;
+
+  /* Spacing scale — 4px base, one rhythm across the whole page */
+  --s1: 4px;  --s2: 8px;   --s3: 12px;  --s4: 16px;  --s5: 24px;
+  --s6: 32px; --s7: 48px;  --s8: 64px;  --s9: 96px;  --s10: 128px;
+
+  /* Frames are sharp — architectural, gallery-cut. Actions stay pill. */
+  --radius: 0px;
+  --radius-pill: 100px;
 
   /* Cinematic easing — the GSAP house curve, mirrored in CSS */
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
@@ -134,11 +141,11 @@ h1, h2, h3, h4 {
 }
 .display em { font-style: italic; font-weight: 380; color: var(--honey); }
 
-.h2 { font-size: clamp(2.05rem, 4.6vw, 3.7rem); letter-spacing: -0.022em; }
-.h3 { font-size: clamp(1.45rem, 2.6vw, 2.15rem); }
+.h2 { font-size: clamp(2.1rem, 4.6vw, 3.7rem); letter-spacing: -0.024em; }
+.h3 { font-size: clamp(1.5rem, 2.6vw, 2.2rem); letter-spacing: -0.02em; }
 .lede {
-  font-size: clamp(1.12rem, 1.7vw, 1.4rem);
-  line-height: 1.52; color: var(--ivory-soft); font-weight: 400;
+  font-size: clamp(1.1rem, 1.4vw, 1.28rem);
+  line-height: 1.58; color: var(--ivory-soft); font-weight: 400;
 }
 .muted { color: var(--ivory-dim); }
 
@@ -162,12 +169,12 @@ h1, h2, h3, h4 {
 /* ---- Buttons ------------------------------------------------------------ */
 .btn {
   --bbg: var(--honey); --bfg: var(--void);
-  display: inline-flex; align-items: center; gap: 0.6em;
-  font-family: var(--mono); font-size: 0.8rem; font-weight: 700;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  padding: 1.02em 1.7em; border-radius: 100px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.6em;
+  font-family: var(--mono); font-size: 0.82rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 1.18em 2.15em; min-height: 54px; border-radius: var(--radius-pill);
   background: var(--bbg); color: var(--bfg);
-  border: 1px solid transparent; position: relative; isolation: isolate;
+  border: 1px solid transparent; position: relative; isolation: isolate; overflow: hidden;
   transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease), background 0.35s, color 0.35s, border-color 0.35s;
   will-change: transform;
 }
@@ -176,6 +183,15 @@ h1, h2, h3, h4 {
 .btn:hover .arrow { transform: translateX(5px); }
 .btn--amber { background: var(--honey); color: var(--void); }
 .btn--amber:hover { background: var(--honey-lift); }
+/* a bar of light sweeps the amber button on hover — the brand motif, in miniature */
+.btn--amber::after {
+  content: ""; position: absolute; top: 0; left: 0; z-index: -1; height: 100%; width: 55%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  transform: translateX(-200%) skewX(-14deg); pointer-events: none;
+  transition: transform 0.8s var(--ease);
+}
+.btn--amber:hover::after { transform: translateX(340%) skewX(-14deg); }
+@media (prefers-reduced-motion: reduce) { .btn--amber::after { display: none; } }
 .btn--ghost {
   background: transparent; color: var(--ivory);
   border-color: var(--line-2);
@@ -942,3 +958,59 @@ h1, h2, h3, h4 {
 .metric div { background: var(--coal); padding: 18px 20px; }
 .metric b { display: block; font-family: var(--display); font-size: 1.5rem; color: var(--honey); font-weight: 500; line-height: 1; }
 .metric span { display: block; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ivory-dim); margin-top: 10px; }
+
+/* ==========================================================================
+   MICRO-INTERACTIONS — a thin warm glow as cards light up on hover.
+   Placed last so it layers over the per-component hover shadows above.
+   ========================================================================== */
+.coll { transition: border-color 0.5s var(--ease), box-shadow 0.6s var(--ease); }
+.coll:hover {
+  border-color: var(--line-2);
+  box-shadow: 0 30px 60px -34px rgba(0, 0, 0, 0.82), 0 0 50px -16px var(--ember-soft);
+}
+.matcard:hover, .scard:hover, .profile:hover {
+  box-shadow: 0 34px 60px -34px rgba(0, 0, 0, 0.82), 0 0 48px -18px var(--ember-soft);
+}
+.value:hover {
+  box-shadow: 0 24px 50px -30px rgba(0, 0, 0, 0.8), 0 0 40px -18px var(--ember-soft);
+}
+
+/* ==========================================================================
+   PRELOADER — a brief lit curtain that lifts into the hero.
+   Visible by default (no flash); JS lifts it, <noscript> hides it, and a CSS
+   failsafe guarantees it never stays stuck if the scripts fail to run.
+   ========================================================================== */
+.preloader {
+  position: fixed; inset: 0; z-index: 9999;
+  display: grid; place-items: center;
+  background: var(--void);
+  animation: pl-failsafe 0s linear 5s forwards; /* safety net if JS never runs */
+}
+.preloader__inner { display: flex; flex-direction: column; align-items: center; gap: var(--s5); }
+.preloader__mark {
+  font-family: var(--display); font-size: clamp(2rem, 6vw, 3.2rem); font-weight: 500;
+  letter-spacing: -0.01em; color: var(--ivory);
+  display: inline-flex; align-items: baseline; gap: 0.14em;
+}
+.preloader__mark .co {
+  font-family: var(--mono); font-size: 0.3em; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--honey); transform: translateY(-0.9em);
+}
+.preloader__bar { width: clamp(120px, 22vw, 220px); height: 2px; background: var(--line-2); overflow: hidden; }
+.preloader__fill {
+  display: block; height: 100%; width: 100%; transform: scaleX(0); transform-origin: left;
+  background: linear-gradient(90deg, var(--honey-deep), var(--honey), var(--honey-lift));
+  box-shadow: 0 0 14px 1px var(--ember);
+}
+@keyframes pl-failsafe { to { opacity: 0; visibility: hidden; } }
+@media (prefers-reduced-motion: reduce) { .preloader { display: none; } }
+
+/* ==========================================================================
+   SPLIT-TEXT HEADLINES — JS wraps each word in a mask; the inner slides up.
+   No JS / reduced-motion = the headline is just plain, fully-visible text.
+   ========================================================================== */
+.word {
+  display: inline-block; overflow: hidden; vertical-align: top;
+  padding-bottom: 0.12em; margin-bottom: -0.12em;
+}
+.word__i { display: inline-block; will-change: transform; }

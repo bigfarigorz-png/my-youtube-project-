@@ -145,7 +145,10 @@
      MOTION LAYER (only when safe)
      ==================================================================== */
   if (!hasGSAP || reduceMQ.matches) {
-    // No motion: anchor links fall back to native smooth scroll (CSS).
+    // No motion: drop the preloader curtain immediately so the page is usable,
+    // and let anchor links fall back to native smooth scroll (CSS).
+    var plOff = document.querySelector("[data-preloader]");
+    if (plOff && plOff.parentNode) plOff.parentNode.removeChild(plOff);
     return;
   }
 
@@ -181,18 +184,74 @@
     });
   }
 
-  /* ---- Hero load sequence ---- */
+  /* ---- Split a heading's words into masked spans (keeps inline <em> etc.) ---- */
+  function splitWords(el) {
+    var inners = [];
+    [].slice.call(el.childNodes).forEach(function (node) {
+      if (node.nodeType === 3) {                 // text node — wrap each word in a mask
+        if (!node.nodeValue.trim()) return;
+        var parts = node.nodeValue.split(/(\s+)/), frag = document.createDocumentFragment();
+        parts.forEach(function (p) {
+          if (p === "") return;
+          if (/^\s+$/.test(p)) { frag.appendChild(document.createTextNode(p)); return; }
+          var mask = document.createElement("span"); mask.className = "word";
+          var inner = document.createElement("span"); inner.className = "word__i";
+          inner.textContent = p; mask.appendChild(inner);
+          frag.appendChild(mask); inners.push(inner);
+        });
+        node.parentNode.replaceChild(frag, node);
+      } else if (node.nodeType === 1) {          // element (e.g. <em>) — recurse, keep its styling
+        inners = inners.concat(splitWords(node));
+      }
+    });
+    return inners;
+  }
+
+  /* ---- Hero headline reveals word-by-word, started by the preloader ---- */
   var hero = document.querySelector(".hero");
+  var heroTL = null;
   if (hero) {
-    var tl = gsap.timeline({ defaults: { ease: "expo.out" } });
-    tl.fromTo(".hero__media img", { scale: 1.18 }, { scale: 1.12, duration: 1.8, ease: "power2.out" }, 0)
+    var heroH1 = hero.querySelector("h1[data-split]");
+    var heroWords = heroH1 ? splitWords(heroH1) : [];
+    if (heroWords.length) gsap.set(heroWords, { yPercent: 110 });
+    heroTL = gsap.timeline({ paused: true, defaults: { ease: "expo.out" } });
+    heroTL.fromTo(".hero__media img", { scale: 1.18 }, { scale: 1.12, duration: 1.8, ease: "power2.out" }, 0)
       .fromTo(hero, { "--bloom": 0 }, { "--bloom": 0.85, duration: 2.0, ease: "power2.out" }, 0.1)
-      .fromTo(".hero .line > span", { yPercent: 115 }, { yPercent: 0, duration: 1.15, stagger: 0.1 }, 0.35)
-      .fromTo(".hero__route", { opacity: 0, y: -8 }, { opacity: 1, y: 0, duration: 0.8 }, 0.5)
+      .to(heroWords, { yPercent: 0, duration: 1.0, stagger: 0.045 }, 0.2)
+      .fromTo(".hero__route", { opacity: 0, y: -8 }, { opacity: 1, y: 0, duration: 0.8 }, 0.45)
       .fromTo(".hero__sub", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.9 }, 0.7)
       .fromTo(".hero__cta > *", { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.1 }, 0.85)
       .fromTo(".hero__foot", { opacity: 0 }, { opacity: 1, duration: 0.9 }, 1.0);
   }
+
+  /* ---- Preloader curtain lifts, then hands off to the hero ---- */
+  var heroStarted = false;
+  function startHero() { if (heroStarted) return; heroStarted = true; if (heroTL) heroTL.play(0); }
+  var preloader = document.querySelector("[data-preloader]");
+  if (preloader) {
+    gsap.timeline({ onComplete: function () { preloader.style.display = "none"; ScrollTrigger.refresh(); } })
+      .to(".preloader__fill", { scaleX: 1, duration: 0.85, ease: "power2.inOut" }, 0.1)
+      .to(".preloader__mark", { y: -12, opacity: 0, duration: 0.45, ease: "power2.in" }, 0.7)
+      .to(preloader, { yPercent: -100, duration: 0.9, ease: "expo.inOut" }, 0.9)
+      .add(startHero, 1.0);
+    // safety net: never let a preloader hiccup strand the hero hidden
+    setTimeout(startHero, 2600);
+  } else {
+    startHero();
+  }
+
+  /* ---- Section headings reveal word-by-word as they enter ---- */
+  gsap.utils.toArray(".section-head .h2[data-anim], .pagehero .display[data-anim]").forEach(function (h) {
+    var words = splitWords(h);
+    if (!words.length) return;            // nothing to split — leave it for the [data-anim] batch
+    h.removeAttribute("data-anim");        // we own its reveal now, so the batch skips it
+    gsap.set(h, { opacity: 1 });
+    gsap.set(words, { yPercent: 110 });
+    ScrollTrigger.create({
+      trigger: h, start: "top 86%", once: true,
+      onEnter: function () { gsap.to(words, { yPercent: 0, duration: 0.9, ease: "expo.out", stagger: 0.02 }); }
+    });
+  });
 
   /* ---- Scroll reveals: batch [data-anim] with stagger ---- */
   ScrollTrigger.batch("[data-anim]", {
@@ -303,7 +362,7 @@
       ScrollTrigger.getAll().forEach(function (t) { t.kill(); });
       if (lenis) lenis.destroy();
       gsap.globalTimeline.clear();
-      gsap.set("[data-anim], .hero .line > span, .hero__sub, .hero__cta > *, .hero__foot, .hero__route",
+      gsap.set("[data-anim], .hero h1 .word__i, .section-head .h2 .word__i, .hero__sub, .hero__cta > *, .hero__foot, .hero__route",
         { clearProps: "all", opacity: 1, y: 0, scale: 1, yPercent: 0 });
       root.classList.remove("anim-ready");
     }
