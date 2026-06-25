@@ -1128,6 +1128,7 @@ button { font: inherit; background: none; border: 0; color: inherit; cursor: poi
   display: grid;
   grid-template-columns: 1.15fr 1fr;
   width: min(1180px, 100%);
+  height: min(86svh, 760px);
   max-height: 92svh;
   background: var(--bg);
   border: 1px solid var(--line);
@@ -1156,12 +1157,63 @@ button { font: inherit; background: none; border: 0; color: inherit; cursor: poi
 
 .modal__media {
   min-height: 320px;
+  min-width: 0;
   background: var(--panel);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.modal__media-main {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.modal__media-main img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.modal__thumbs {
+  flex: 0 0 auto;
+  min-width: 0;
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.6rem;
+  overflow-x: auto;
+  background: var(--bg-soft);
+  border-top: 1px solid var(--line);
+  scrollbar-width: thin;
+}
+.modal__thumb {
+  flex: 0 0 auto;
+  width: 86px;
+  height: 60px;
+  padding: 0;
+  border: 1px solid transparent;
+  background: none;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.25s, border-color 0.25s;
+}
+.modal__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.modal__thumb.is-active,
+.modal__thumb:hover {
+  opacity: 1;
+  border-color: var(--accent);
 }
 
 .modal__body {
   padding: clamp(1.6rem, 3.4vw, 3rem);
   overflow-y: auto;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 1.1rem;
@@ -1230,8 +1282,9 @@ body.modal-open { overflow: hidden; }
 
   .journal__grid { grid-template-columns: 1fr; }
 
-  .modal__panel { grid-template-columns: 1fr; overflow-y: auto; }
-  .modal__media { max-height: 38vh; min-height: 220px; }
+  .modal__panel { grid-template-columns: 1fr; height: auto; overflow-y: auto; }
+  .modal__media { max-height: 52vh; min-height: 240px; }
+  .modal__thumb { width: 70px; height: 50px; }
 
   .awards__row { grid-template-columns: 4.4rem 1fr; }
   .awards__project { grid-column: 2; text-align: left; margin-top: 0.2rem; }

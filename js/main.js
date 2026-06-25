@@ -311,12 +311,44 @@
   };
   let lastFocused = null;
 
+  const modalThumbs = document.getElementById("modalThumbs");
+
+  function buildGallery(gallery, title) {
+    if (!modalThumbs) return;
+    modalThumbs.innerHTML = "";
+    modalThumbs.style.display = gallery.length > 1 ? "" : "none";
+    if (gallery.length <= 1) return;
+    gallery.forEach((src, i) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "modal__thumb" + (i === 0 ? " is-active" : "");
+      b.setAttribute("role", "tab");
+      b.setAttribute("aria-label", `${title} — image ${i + 1} of ${gallery.length}`);
+      const im = document.createElement("img");
+      im.src = src;
+      im.alt = "";
+      im.loading = "lazy";
+      b.appendChild(im);
+      b.addEventListener("click", () => {
+        modalImg.src = src;
+        modalThumbs.querySelectorAll(".modal__thumb").forEach((t) => t.classList.remove("is-active"));
+        b.classList.add("is-active");
+      });
+      modalThumbs.appendChild(b);
+    });
+  }
+
   function openModal(project) {
     const d = project.dataset;
     const img = project.querySelector("img");
 
-    modalImg.src = img.src;
-    modalImg.alt = img.alt;
+    const gallery = (d.gallery ? d.gallery.split(",") : [img.src])
+      .map((s) => s.trim())
+      .filter(Boolean);
+    modalImg.src = gallery[0];
+    modalImg.alt = d.title;
+    buildGallery(gallery, d.title);
+    if (modalThumbs) modalThumbs.scrollLeft = 0;
     fields.kicker.textContent = `${capitalize(d.category)} — ${d.year}`;
     fields.title.textContent = d.title;
     fields.desc.textContent = d.desc;
