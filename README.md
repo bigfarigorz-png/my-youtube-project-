@@ -20,7 +20,7 @@ JavaScript: **no frameworks, no build step, no dependencies**.
 
 ## 🌍 Live site
 
-**https://bigfarigorz-png.github.io/my-youtube-project-/**
+**https://bahareh-hajizadeh.github.io/**
 
 Deployment is automatic: every push to `main` (or the current working branch) runs
 `.github/workflows/deploy.yml`, which publishes the site to GitHub Pages.
