@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — Bahareh Hajizadeh</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f5f2ec'/%3E%3Ctext x='50' y='68' font-size='46' text-anchor='middle' fill='%239c6b43' font-family='Georgia, serif'%3EBH%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .not-found {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      padding: var(--pad);
+      padding-top: calc(var(--pad) + 5rem);
+    }
+    .not-found__num {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(6rem, 22vw, 18rem);
+      line-height: 0.9;
+      letter-spacing: -0.04em;
+      color: var(--panel);
+      user-select: none;
+    }
+    .not-found__body {
+      margin-top: 2.5rem;
+      max-width: 32rem;
+    }
+    .not-found__title {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .not-found__title em { font-style: italic; color: var(--accent); }
+    .not-found__text {
+      color: var(--ink-soft);
+      font-weight: 300;
+      font-size: 1.05rem;
+      margin-bottom: 2.4rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom cursor -->
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header class="header is-scrolled" id="header">
+    <a class="header__logo" href="index.html#top" aria-label="Bahareh Hajizadeh — home">
+      <span class="header__logo-mark">B—H</span>
+      <span class="header__logo-text">Bahareh Hajizadeh</span>
+    </a>
+    <nav class="header__nav" aria-label="Primary">
+      <a href="index.html#studio">Studio</a>
+      <a href="index.html#works">Works</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#journal">Journal</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <a class="header__cta" href="index.html#contact">Start a project</a>
+    <button class="header__burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <nav class="mobile-menu__nav" aria-label="Mobile">
+      <a href="index.html#studio"><em>01</em> Studio</a>
+      <a href="index.html#works"><em>02</em> Works</a>
+      <a href="index.html#services"><em>03</em> Services</a>
+      <a href="index.html#process"><em>04</em> Process</a>
+      <a href="index.html#journal"><em>05</em> Journal</a>
+      <a href="index.html#contact"><em>06</em> Contact</a>
+    </nav>
+    <div class="mobile-menu__foot">
+      <a href="mailto:bigfarigorz@gmail.com">bigfarigorz@gmail.com</a>
+      <span>Yerevan · Tehran · Mashhad</span>
+    </div>
+  </div>
+
+  <main>
+    <div class="not-found">
+      <p class="not-found__num" aria-hidden="true">404</p>
+      <div class="not-found__body">
+        <h1 class="not-found__title">This page doesn't<br /><em>exist — yet.</em></h1>
+        <p class="not-found__text">
+          The page you were looking for has moved or was never here.
+          Perhaps you were looking for a project, a journal article, or a way to get in touch.
+        </p>
+        <a class="link-arrow" href="index.html" data-cursor>Return home</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <span>© 2026 Bahareh Hajizadeh — All rights reserved</span>
+    <span>Architecture &amp; Interior Design — Yerevan · Tehran · Mashhad</span>
+    <a href="index.html#top" data-cursor>Back to site ↑</a>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

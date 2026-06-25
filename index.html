@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bahareh Hajizadeh — Architecture &amp; Interior Design</title>
+  <meta name="description" content="Bahareh Hajizadeh is an architect and interior designer creating calm, light-driven buildings and interiors between Yerevan, Tehran and Mashhad." />
+  <meta property="og:title" content="Bahareh Hajizadeh — Architecture &amp; Interior Design" />
+  <meta property="og:description" content="Calm, light-driven architecture and interiors — Yerevan · Tehran · Mashhad." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/projects/marble-house/exterior-main.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f5f2ec'/%3E%3Ctext x='50' y='68' font-size='46' text-anchor='middle' fill='%239c6b43' font-family='Georgia, serif'%3EBH%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Preloader -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader__inner">
+      <span class="preloader__word">Bahareh</span>
+      <span class="preloader__word preloader__word--italic">Hajizadeh</span>
+    </div>
+    <span class="preloader__counter" id="preloaderCounter">0</span>
+  </div>
+
+  <!-- Custom cursor -->
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <a class="header__logo" href="#top" aria-label="Bahareh Hajizadeh — home">
+      <span class="header__logo-mark">B—H</span>
+      <span class="header__logo-text">Bahareh Hajizadeh</span>
+    </a>
+    <nav class="header__nav" aria-label="Primary">
+      <a href="#studio" data-cursor>Studio</a>
+      <a href="#works" data-cursor>Works</a>
+      <a href="#services" data-cursor>Services</a>
+      <a href="#process" data-cursor>Process</a>
+      <a href="#journal" data-cursor>Journal</a>
+      <a href="#contact" data-cursor>Contact</a>
+    </nav>
+    <a class="header__cta" href="#contact" data-cursor>Start a project</a>
+    <button class="header__burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <nav class="mobile-menu__nav" aria-label="Mobile">
+      <a href="#studio"><em>01</em> Studio</a>
+      <a href="#works"><em>02</em> Works</a>
+      <a href="#services"><em>03</em> Services</a>
+      <a href="#process"><em>04</em> Process</a>
+      <a href="#journal"><em>05</em> Journal</a>
+      <a href="#contact"><em>06</em> Contact</a>
+    </nav>
+    <div class="mobile-menu__foot">
+      <a href="mailto:bigfarigorz@gmail.com">bigfarigorz@gmail.com</a>
+      <span>Yerevan · Tehran · Mashhad</span>
+    </div>
+  </div>
+
+  <main id="top">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <figure class="hero__media" id="heroMedia">
+        <img
+          src="assets/projects/curved-wood-villa/garden-front.jpg"
+          alt="Curved timber-clad villa opening to a garden with pool and fountains"
+          fetchpriority="high" />
+      </figure>
+      <div class="hero__overlay"></div>
+
+      <div class="hero__top reveal">
+        <span>Architecture &amp; Interior Design</span>
+        <span>Yerevan · Tehran · Mashhad</span>
+      </div>
+
+      <div class="hero__content">
+        <h1 class="hero__title">
+          <span class="hero__line"><span>Bahareh</span></span>
+          <span class="hero__line hero__line--italic"><span>Hajizadeh</span></span>
+        </h1>
+        <p class="hero__sub reveal">
+          Calm, light-driven buildings and interiors — designed and built
+          between <strong>Armenia</strong> and <strong>Iran</strong>.
+        </p>
+      </div>
+
+      <div class="hero__bottom">
+        <a class="hero__scroll" href="#studio" data-cursor>
+          <span class="hero__scroll-line"></span>
+          <span>Scroll to explore</span>
+        </a>
+        <span class="hero__index">Featured — Marble House, 2024</span>
+      </div>
+    </section>
+
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Architecture — Interiors — Renovation — Villas — Penthouses — Cultural Spaces — </span>
+        <span>Architecture — Interiors — Renovation — Villas — Penthouses — Cultural Spaces — </span>
+      </div>
+    </div>
+
+    <!-- ============ STUDIO ============ -->
+    <section class="studio section" id="studio">
+      <div class="section__head reveal">
+        <span class="section__num">01</span>
+        <span class="section__label">Studio</span>
+      </div>
+
+      <h2 class="studio__statement reveal">
+        We shape quiet, generous spaces —
+        <em>from Yerevan's tuff streets</em>
+        to the foothills of the Alborz.
+      </h2>
+
+      <div class="studio__grid">
+        <figure class="studio__media reveal" data-cursor-label="The studio">
+          <img
+            src="assets/projects/marble-house/double-height.jpg"
+            alt="Double-height living hall in honed travertine and oak" loading="lazy" decoding="async" />
+        </figure>
+        <div class="studio__text">
+          <p class="reveal">
+            Bahareh Hajizadeh is an architect and interior designer practicing between
+            Yerevan, Tehran and Mashhad. Her studio carries projects from the first
+            sketch to the last handle — architecture, interiors and renovation under
+            one author's eye.
+          </p>
+          <p class="reveal">
+            The work draws on two deep traditions — Persian geometry and craft, and the
+            stone modernism of the Caucasus — translated into calm contemporary spaces:
+            few materials, precise detail, generous daylight.
+          </p>
+          <a class="link-arrow reveal" href="#works" data-cursor>Explore selected works</a>
+        </div>
+      </div>
+
+      <div class="stats reveal">
+        <div class="stats__item">
+          <span class="stats__value"><span data-count="10">0</span>+</span>
+          <span class="stats__label">Years of practice</span>
+        </div>
+        <div class="stats__item">
+          <span class="stats__value"><span data-count="64">0</span></span>
+          <span class="stats__label">Completed projects</span>
+        </div>
+        <div class="stats__item">
+          <span class="stats__value"><span data-count="9">0</span></span>
+          <span class="stats__label">Design awards</span>
+        </div>
+        <div class="stats__item">
+          <span class="stats__value"><span data-count="3">0</span></span>
+          <span class="stats__label">Cities</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WORKS ============ -->
+    <section class="works section" id="works">
+      <div class="section__head reveal">
+        <span class="section__num">02</span>
+        <span class="section__label">Selected works</span>
+      </div>
+
+      <div class="works__bar reveal">
+        <h2 class="works__title">Buildings, interiors<br /><em>&amp; everything between.</em></h2>
+        <div class="filters" role="group" aria-label="Filter projects">
+          <button class="filter is-active" data-filter="all" data-cursor>All</button>
+          <button class="filter" data-filter="residential" data-cursor>Residential</button>
+          <button class="filter" data-filter="interior" data-cursor>Interior</button>
+          <button class="filter" data-filter="cultural" data-cursor>Cultural</button>
+          <button class="filter" data-filter="commercial" data-cursor>Commercial</button>
+        </div>
+      </div>
+
+      <div class="works__grid" id="worksGrid">
+
+                <article class="project reveal" data-category="interior"
+          data-title="Marble House"
+          data-location="Tehran, Iran"
+          data-year="2024"
+          data-area="640 m²"
+          data-role="Architecture &amp; interior design"
+          data-desc="A double-height villa organised around a top-lit living hall. Honed travertine, smoked oak and black marble are held together by a single language of recessed linear light; a glazed court draws the garden deep into the plan."
+          data-gallery="assets/projects/marble-house/exterior-main.jpg,assets/projects/marble-house/living-dining-kitchen.jpg,assets/projects/marble-house/kitchen-bar.jpg,assets/projects/marble-house/double-height.jpg,assets/projects/marble-house/indoor-pool.jpg,assets/projects/marble-house/bathroom.jpg,assets/projects/marble-house/bedroom.jpg,assets/projects/marble-house/dressing.jpg,assets/projects/marble-house/sculptural-stair.jpg,assets/projects/marble-house/corridor.jpg,assets/projects/marble-house/exterior-court.jpg,assets/projects/marble-house/living-stair.jpg">
+          <figure class="project__media" data-cursor-label="View project">
+            <img src="assets/projects/marble-house/exterior-main.jpg" alt="Marble House — Interior &amp; Architecture — Tehran, IR — 2024" loading="lazy" decoding="async" />
+          </figure>
+          <div class="project__meta">
+            <span class="project__index">/01</span>
+            <h3 class="project__name">Marble House</h3>
+            <p class="project__tags">Interior &amp; Architecture — Tehran, IR — 2024</p>
+          </div>
+        </article>
+
+        <article class="project reveal" data-category="residential"
+          data-title="Timber Villa"
+          data-location="Tehran, Iran"
+          data-year="2023"
+          data-area="520 m²"
+          data-role="Architecture, interiors &amp; landscape"
+          data-desc="A villa wrapped in vertical timber battens that curve around a charcoal core. The screen peels open toward the garden, where a reflecting pool, water wall and fountains turn the rear elevation into a continuous water-garden."
+          data-gallery="assets/projects/curved-wood-villa/garden-front.jpg,assets/projects/curved-wood-villa/garden-elevation.jpg,assets/projects/curved-wood-villa/curved-volume.jpg,assets/projects/curved-wood-villa/corner-pool.jpg,assets/projects/curved-wood-villa/front-stair.jpg,assets/projects/curved-wood-villa/garden-fountains.jpg,assets/projects/curved-wood-villa/corner-lookup.jpg,assets/projects/curved-wood-villa/exterior-evening.jpg">
+          <figure class="project__media" data-cursor-label="View project">
+            <img src="assets/projects/curved-wood-villa/garden-front.jpg" alt="Timber Villa — Residential — Tehran, IR — 2023" loading="lazy" decoding="async" />
+          </figure>
+          <div class="project__meta">
+            <span class="project__index">/02</span>
+            <h3 class="project__name">Timber Villa</h3>
+            <p class="project__tags">Residential — Tehran, IR — 2023</p>
+          </div>
+        </article>
+
+        <article class="project reveal" data-category="residential"
+          data-title="Woven Brick Apartments"
+          data-location="Tehran, Iran"
+          data-year="2022"
+          data-area="1,160 m²"
+          data-role="Architecture, facade &amp; interiors — built"
+          data-desc="A built infill apartment building whose street facade is a hand-laid &lsquo;woven&rsquo; brick screen — vertical and horizontal courses interlocking to shade recessed, planted balconies. Inside, black marble stairs run against bare textured-brick walls."
+          data-gallery="assets/projects/apartment-tower/facade-night.jpg,assets/projects/apartment-tower/facade-detail.jpg,assets/projects/apartment-tower/facade-lookup.jpg,assets/projects/apartment-tower/facade-frontal.jpg,assets/projects/apartment-tower/facade-day.jpg,assets/projects/apartment-tower/rooftop-terrace.jpg,assets/projects/apartment-tower/stair-marble.jpg,assets/projects/apartment-tower/interior-empty.jpg,assets/projects/apartment-tower/courtyard-wood.jpg,assets/projects/apartment-tower/dwg-section.jpg,assets/projects/apartment-tower/dwg-plan-typical.jpg,assets/projects/apartment-tower/dwg-axon-brick.jpg,assets/projects/apartment-tower/board-context.jpg">
+          <figure class="project__media" data-cursor-label="View project">
+            <img src="assets/projects/apartment-tower/facade-night.jpg" alt="Woven Brick Apartments — Residential — Tehran, IR — 2022 · Built" loading="lazy" decoding="async" />
+          </figure>
+          <div class="project__meta">
+            <span class="project__index">/03</span>
+            <h3 class="project__name">Woven Brick Apartments</h3>
+            <p class="project__tags">Residential — Tehran, IR — 2022 · Built</p>
+          </div>
+        </article>
+
+        <article class="project reveal" data-category="residential"
+          data-title="Courtyard House"
+          data-location="Mashhad, Iran"
+          data-year="2023"
+          data-area="460 m²"
+          data-role="Architecture &amp; interiors"
+          data-desc="A contemporary courtyard house studied from section to joinery: a glazed living volume and a brick service wing frame a planted court, with a dressing room and gallery-like circulation lined in oak and bronzed glass."
+          data-gallery="assets/projects/courtyard-villa/iso-cutaway.jpg,assets/projects/courtyard-villa/section-bb.jpg,assets/projects/courtyard-villa/dressing-room.jpg,assets/projects/courtyard-villa/hallway.jpg,assets/projects/courtyard-villa/plan-ground.jpg,assets/projects/courtyard-villa/plan-first.jpg,assets/projects/courtyard-villa/courtyard-villa_plan-furnished.png,assets/projects/courtyard-villa/plan-site.jpg,assets/projects/courtyard-villa/elevation-east.jpg,assets/projects/courtyard-villa/elevation-south.jpg">
+          <figure class="project__media" data-cursor-label="View project">
+            <img src="assets/projects/courtyard-villa/iso-cutaway.jpg" alt="Courtyard House — Residential — Mashhad, IR — 2023" loading="lazy" decoding="async" />
+          </figure>
+          <div class="project__meta">
+            <span class="project__index">/04</span>
+            <h3 class="project__name">Courtyard House</h3>
+            <p class="project__tags">Residential — Mashhad, IR — 2023</p>
+          </div>
+        </article>
+
+        <article class="project reveal" data-category="cultural"
+          data-title="Riverfront Park"
+          data-location="Isfahan, Iran"
+          data-year="2020"
+          data-area="—"
+          data-role="Landscape &amp; urban design — competition"
+          data-desc="A competition proposal for a riverfront park on the Zayandeh-Rud. Flowing site lines gather into undulating timber-shell pavilions and brick chimney landmarks, reinterpreting the Persian bazaar as a flexible civic space for everyday and ritual use."
+          data-gallery="assets/projects/riverfront-park/aerial-main.jpg,assets/projects/riverfront-park/wave-pavilion.jpg,assets/projects/riverfront-park/plaza-lampposts.jpg,assets/projects/riverfront-park/board-hierarchy.jpg,assets/projects/riverfront-park/board-passage.jpg,assets/projects/riverfront-park/board-flexible.jpg,assets/projects/riverfront-park/board-sitelines.jpg">
+          <figure class="project__media" data-cursor-label="View project">
+            <img src="assets/projects/riverfront-park/aerial-main.jpg" alt="Riverfront Park — Cultural / Landscape — Isfahan, IR — 2020" loading="lazy" decoding="async" />
+          </figure>
+          <div class="project__meta">
+            <span class="project__index">/05</span>
+            <h3 class="project__name">Riverfront Park</h3>
+            <p class="project__tags">Cultural / Landscape — Isfahan, IR — 2020</p>
+          </div>
+        </article>
+
+        <article class="project reveal" data-category="commercial"
+          data-title="Saba Steel Gateway"
+          data-location="Persian Gulf, Iran"
+          data-year="2021"
+          data-area="—"
+          data-role="Architecture — competition, 2nd prize"
+          data-desc="A competition-winning (2nd prize) entrance gateway for the Persian Gulf Saba Steel Company: a long cantilevered concrete portal of stacked, staggered beams that frames the arrival sequence for trucks and visitors alike."
+          data-gallery="assets/projects/saba-steel-gateway/board-main.jpg">
+          <figure class="project__media" data-cursor-label="View project">
+            <img src="assets/projects/saba-steel-gateway/board-main.jpg" alt="Saba Steel Gateway — Commercial — Persian Gulf, IR — 2021 · 2nd prize" loading="lazy" decoding="async" />
+          </figure>
+          <div class="project__meta">
+            <span class="project__index">/06</span>
+            <h3 class="project__name">Saba Steel Gateway</h3>
+            <p class="project__tags">Commercial — Persian Gulf, IR — 2021 · 2nd prize</p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ============ QUOTE BAND ============ -->
+    <section class="quote">
+      <figure class="quote__media">
+        <img src="assets/projects/apartment-tower/facade-lookup.jpg"
+          alt="Woven brick facade seen against the sky" loading="lazy" decoding="async" />
+      </figure>
+      <blockquote class="quote__text reveal">
+        "We don't decorate space — we orchestrate
+        <em>light, mass and silence.</em>"
+        <cite>— Bahareh Hajizadeh</cite>
+      </blockquote>
+    </section>
+
+    <!-- ============ SERVICES ============ -->
+    <section class="practice section" id="services">
+      <div class="section__head reveal">
+        <span class="section__num">03</span>
+        <span class="section__label">Services</span>
+      </div>
+
+      <h2 class="practice__title reveal">From first sketch<br /><em>to final handle.</em></h2>
+
+      <ul class="services">
+        <li class="service reveal" data-cursor>
+          <span class="service__num">01</span>
+          <div class="service__body">
+            <h3>Architectural Design</h3>
+            <p>Site analysis, concept, permit and construction documents for villas, houses and public buildings — drawings precise enough to price, details considered enough to last.</p>
+          </div>
+          <span class="service__arrow" aria-hidden="true">→</span>
+        </li>
+        <li class="service reveal" data-cursor>
+          <span class="service__num">02</span>
+          <div class="service__body">
+            <h3>Interior Architecture</h3>
+            <p>Interiors designed as buildings in miniature — joinery, lighting, stone and textile composed with the same rigour as structure, from plan to material board.</p>
+          </div>
+          <span class="service__arrow" aria-hidden="true">→</span>
+        </li>
+        <li class="service reveal" data-cursor>
+          <span class="service__num">03</span>
+          <div class="service__body">
+            <h3>Renovation &amp; Site Supervision</h3>
+            <p>Trusted contractors, weekly site visits and author's supervision until handover — so what is built is exactly what was drawn, on budget and on schedule.</p>
+          </div>
+          <span class="service__arrow" aria-hidden="true">→</span>
+        </li>
+        <li class="service reveal" data-cursor>
+          <span class="service__num">04</span>
+          <div class="service__body">
+            <h3>Furniture &amp; Styling</h3>
+            <p>Furniture, art, light and objects — sourced, commissioned or custom-made — so the space is finished, photographed and ready to live in on day one.</p>
+          </div>
+          <span class="service__arrow" aria-hidden="true">→</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ============ PROCESS ============ -->
+    <section class="process section" id="process">
+      <div class="section__head reveal">
+        <span class="section__num">04</span>
+        <span class="section__label">Process</span>
+      </div>
+
+      <h2 class="process__title reveal">Five steps,<br /><em>one author's eye.</em></h2>
+
+      <ol class="process__grid">
+        <li class="step reveal">
+          <span class="step__num">01</span>
+          <h3 class="step__name">Consultation &amp; Brief</h3>
+          <p class="step__text">We meet at the site or online, walk through how you live and work, and agree the scope, budget frame and timeline.</p>
+        </li>
+        <li class="step reveal">
+          <span class="step__num">02</span>
+          <h3 class="step__name">Concept Design</h3>
+          <p class="step__text">Plans, mood and massing — tested fast in sketches and models until the idea is unmistakably yours.</p>
+        </li>
+        <li class="step reveal">
+          <span class="step__num">03</span>
+          <h3 class="step__name">Design Development</h3>
+          <p class="step__text">Full drawing set: layouts, joinery, lighting, materials and specifications — precise enough to tender.</p>
+        </li>
+        <li class="step reveal">
+          <span class="step__num">04</span>
+          <h3 class="step__name">Construction &amp; Supervision</h3>
+          <p class="step__text">Contractor selection, weekly site visits and author's supervision — every detail checked against the drawings.</p>
+        </li>
+        <li class="step reveal">
+          <span class="step__num">05</span>
+          <h3 class="step__name">Styling &amp; Handover</h3>
+          <p class="step__text">Furniture, art and objects placed; the space photographed, documented and handed over ready to live in.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ============ JOURNAL ============ -->
+    <section class="section" id="journal">
+      <div class="section__head reveal">
+        <span class="section__num">05</span>
+        <span class="section__label">Journal</span>
+      </div>
+
+      <div class="works__bar reveal">
+        <h2 class="works__title">Notes on space,<br /><em>material &amp; craft.</em></h2>
+        <a class="link-arrow" href="journal/index.html" data-cursor>All articles</a>
+      </div>
+
+      <div class="journal__grid">
+        <article class="journal-card reveal">
+          <a href="journal/light-and-stone.html" data-cursor>
+            <figure class="journal-card__media">
+              <img src="assets/projects/marble-house/kitchen-bar.jpg"
+                alt="Natural stone surface in warm daylight" loading="lazy" decoding="async" />
+            </figure>
+          </a>
+          <div class="journal-card__meta">
+            <span class="journal-card__cat">Materials</span>
+            <span>·</span>
+            <span>6 min read</span>
+            <span>·</span>
+            <span>May 2025</span>
+          </div>
+          <a href="journal/light-and-stone.html" data-cursor>
+            <h3 class="journal-card__title">Light and Stone: On choosing travertine for contemporary interiors</h3>
+          </a>
+          <p class="journal-card__excerpt">
+            Travertine is having a moment — but not every travertine is the same. Here is how we select, cut and finish it for the projects we take on.
+          </p>
+          <a class="link-arrow" href="journal/light-and-stone.html" data-cursor>Read article</a>
+        </article>
+
+        <article class="journal-card reveal">
+          <a href="journal/persian-courtyard.html" data-cursor>
+            <figure class="journal-card__media">
+              <img src="assets/projects/marble-house/exterior-court.jpg"
+                alt="Courtyard house with pool at evening" loading="lazy" decoding="async" />
+            </figure>
+          </a>
+          <div class="journal-card__meta">
+            <span class="journal-card__cat">Typology</span>
+            <span>·</span>
+            <span>9 min read</span>
+            <span>·</span>
+            <span>Feb 2025</span>
+          </div>
+          <a href="journal/persian-courtyard.html" data-cursor>
+            <h3 class="journal-card__title">The Persian Courtyard: An ancient typology for the contemporary city</h3>
+          </a>
+          <p class="journal-card__excerpt">
+            The howz, the iwan and the planted court — why the courtyard house still offers the best answer to how we want to live in Iran's hot, dry cities.
+          </p>
+          <a class="link-arrow" href="journal/persian-courtyard.html" data-cursor>Read article</a>
+        </article>
+
+        <article class="journal-card reveal">
+          <a href="journal/building-in-yerevan.html" data-cursor>
+            <figure class="journal-card__media">
+              <img src="assets/projects/apartment-tower/facade-detail.jpg"
+                alt="Tuff stone building facade in afternoon light" loading="lazy" decoding="async" />
+            </figure>
+          </a>
+          <div class="journal-card__meta">
+            <span class="journal-card__cat">Place</span>
+            <span>·</span>
+            <span>7 min read</span>
+            <span>·</span>
+            <span>Nov 2024</span>
+          </div>
+          <a href="journal/building-in-yerevan.html" data-cursor>
+            <h3 class="journal-card__title">Building in Yerevan: What Armenian tuff stone teaches you about warmth</h3>
+          </h3>
+          </a>
+          <p class="journal-card__excerpt">
+            Yerevan is a city built from a single material: the rose-pink volcanic tuff that gives it its warmth even in the coldest January. Working with it changes how you think about permanence.
+          </p>
+          <a class="link-arrow" href="journal/building-in-yerevan.html" data-cursor>Read article</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ TESTIMONIALS ============ -->
+    <section class="testi section" id="clients">
+      <div class="section__head reveal">
+        <span class="section__num">06</span>
+        <span class="section__label">Clients say</span>
+      </div>
+
+      <div class="testi__viewport reveal">
+        <div class="testi__track" id="testiTrack">
+          <figure class="testi__slide">
+            <blockquote>"Bahareh turned our duplex into the calmest place in Tehran. Every material feels inevitable — nothing asks for attention, everything rewards it."</blockquote>
+            <figcaption>Niloufar R. — Penthouse Vanak, Tehran</figcaption>
+          </figure>
+          <figure class="testi__slide">
+            <blockquote>"She understood the lake before she drew a single line. The house belongs to Sevan now — and we belong to the house."</blockquote>
+            <figcaption>Armen G. — Villa Sevan, Armenia</figcaption>
+          </figure>
+          <figure class="testi__slide">
+            <blockquote>"Precise drawings, honest budgets, a site visit every week. The renovation finished ahead of schedule — we didn't know that was possible."</blockquote>
+            <figcaption>Sina &amp; Leila M. — Courtyard House, Mashhad</figcaption>
+          </figure>
+          <figure class="testi__slide">
+            <blockquote>"Our gallery finally has the silence the art deserved. Visitors slow down the moment they step inside."</blockquote>
+            <figcaption>Mariam H. — Gallery of Light, Yerevan</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="testi__nav reveal">
+        <button class="testi__btn" id="testiPrev" aria-label="Previous testimonial" data-cursor>←</button>
+        <span class="testi__count"><span id="testiNow">01</span> / <span id="testiTotal">04</span></span>
+        <button class="testi__btn" id="testiNext" aria-label="Next testimonial" data-cursor>→</button>
+      </div>
+    </section>
+
+    <!-- ============ RECOGNITION ============ -->
+    <section class="awards section">
+      <div class="section__head reveal">
+        <span class="section__num">07</span>
+        <span class="section__label">Recognition</span>
+      </div>
+      <ul class="awards__list">
+        <li class="awards__row reveal">
+          <span class="awards__year">2025</span>
+          <span class="awards__name">Architecture MasterPrize — Honorable Mention, Interior</span>
+          <span class="awards__project">Penthouse Vanak</span>
+        </li>
+        <li class="awards__row reveal">
+          <span class="awards__year">2024</span>
+          <span class="awards__name">World Architecture Festival — Shortlist, House</span>
+          <span class="awards__project">Villa Sevan</span>
+        </li>
+        <li class="awards__row reveal">
+          <span class="awards__year">2023</span>
+          <span class="awards__name">2A Asia Architecture Award — Winner, Cultural</span>
+          <span class="awards__project">Gallery of Light</span>
+        </li>
+        <li class="awards__row reveal">
+          <span class="awards__year">2022</span>
+          <span class="awards__name">Memar Award — Shortlist, Public Building</span>
+          <span class="awards__project">Brick Pavilion</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="contact section" id="contact">
+      <div class="section__head reveal">
+        <span class="section__num">08</span>
+        <span class="section__label">Contact</span>
+      </div>
+      <h2 class="contact__title reveal">
+        Let's build something<br /><em>quiet &amp; bold.</em>
+      </h2>
+      <a class="contact__mail reveal" href="mailto:bigfarigorz@gmail.com" data-cursor>bigfarigorz@gmail.com</a>
+
+      <form class="contact-form reveal" id="contactForm"
+        action="https://formsubmit.co/bigfarigorz@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="New project inquiry — Bahareh Hajizadeh portfolio" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="text" name="_honey" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <div class="contact-form__row">
+          <label class="field">
+            <span>Your name</span>
+            <input type="text" name="name" required autocomplete="name" placeholder="Jane Doe" />
+          </label>
+          <label class="field">
+            <span>Your email</span>
+            <input type="email" name="email" required autocomplete="email" placeholder="jane@example.com" />
+          </label>
+        </div>
+        <label class="field">
+          <span>Tell me about your project</span>
+          <textarea name="message" rows="4" required
+            placeholder="A villa by the lake, a penthouse, a renovation…"></textarea>
+        </label>
+        <div class="contact-form__foot">
+          <button class="contact-form__submit" type="submit" data-cursor>Send inquiry →</button>
+          <p class="contact-form__status" id="formStatus" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+
+      <div class="contact__grid reveal">
+        <div>
+          <h4>Yerevan — Armenia</h4>
+          <p>Kentron district<br />Meetings by appointment</p>
+        </div>
+        <div>
+          <h4>Tehran — Iran</h4>
+          <p>Vanak<br />Meetings by appointment</p>
+        </div>
+        <div>
+          <h4>Mashhad — Iran</h4>
+          <p>Ahmadabad<br />Meetings by appointment</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <span>© 2026 Bahareh Hajizadeh — All rights reserved</span>
+    <span class="footer__credit">Architecture &amp; Interior Design — Yerevan · Tehran · Mashhad</span>
+    <a href="#top" data-cursor>Back to top ↑</a>
+  </footer>
+
+  <!-- ============ PROJECT MODAL ============ -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal__backdrop" data-close></div>
+    <div class="modal__panel">
+      <button class="modal__close" data-close aria-label="Close project" data-cursor>✕</button>
+      <figure class="modal__media">
+        <div class="modal__media-main"><img id="modalImg" src="" alt="" /></div>
+        <div class="modal__thumbs" id="modalThumbs" role="tablist" aria-label="Project images"></div>
+      </figure>
+      <div class="modal__body">
+        <p class="modal__kicker" id="modalKicker"></p>
+        <h3 class="modal__title" id="modalTitle"></h3>
+        <p class="modal__desc" id="modalDesc"></p>
+        <dl class="modal__facts">
+          <div><dt>Location</dt><dd id="modalLocation"></dd></div>
+          <div><dt>Year</dt><dd id="modalYear"></dd></div>
+          <div><dt>Area</dt><dd id="modalArea"></dd></div>
+          <div><dt>Scope</dt><dd id="modalRole"></dd></div>
+        </dl>
+        <a class="link-arrow" href="#contact" data-close data-cursor>Commission a similar project</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Smooth scroll + scroll-driven animation -->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

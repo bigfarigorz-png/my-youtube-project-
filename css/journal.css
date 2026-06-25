@@ -1,0 +1,175 @@
+/* ============================================================
+   BAHAREH HAJIZADEH — Journal / Article styles
+   Shares the main design system (style.css loaded first).
+   Prose column, article header, prev/next navigation.
+   ============================================================ */
+
+/* ============================================================
+   JOURNAL INDEX PAGE
+   ============================================================ */
+.journal-index__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+
+@media (max-width: 920px) {
+  .journal-index__grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+  .journal-index__grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   ARTICLE HEADER
+   ============================================================ */
+.article {
+  padding-top: calc(var(--pad) + 5rem);
+}
+
+.article__kicker {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 1.6rem;
+}
+.article__kicker span { color: var(--muted); font-weight: 400; }
+
+.article__title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 6vw, 5.2rem);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  max-width: 18ch;
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+.article__title em { font-style: italic; color: var(--accent); }
+
+.article__hero {
+  width: 100%;
+  aspect-ratio: 16 / 7;
+  overflow: hidden;
+  background: var(--panel);
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+}
+.article__hero img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ============================================================
+   PROSE
+   ============================================================ */
+.article__body {
+  max-width: 68ch;
+  margin: 0 auto;
+  padding: 0 var(--pad);
+}
+
+.article__body p,
+.article__body ul,
+.article__body ol,
+.article__body blockquote {
+  margin-bottom: 1.6em;
+  color: var(--ink-soft);
+  font-weight: 300;
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.article__body h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  line-height: 1.2;
+  color: var(--ink);
+  margin: 2.6em 0 0.8em;
+}
+
+.article__body h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.2rem, 2.2vw, 1.7rem);
+  color: var(--ink);
+  margin: 2em 0 0.6em;
+}
+
+.article__body strong { font-weight: 600; color: var(--ink); }
+
+.article__body em { font-style: italic; color: var(--accent); }
+
+.article__body blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: 1.5rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.4vw, 1.45rem);
+  color: var(--ink);
+}
+
+.article__body ul {
+  padding-left: 1.4rem;
+  list-style: disc;
+}
+.article__body ol {
+  padding-left: 1.4rem;
+  list-style: decimal;
+}
+.article__body li { margin-bottom: 0.5em; }
+
+.article__body figure {
+  margin: 2.5rem 0;
+}
+.article__body figure img {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  background: var(--panel);
+}
+.article__body figcaption {
+  margin-top: 0.8rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+/* ============================================================
+   ARTICLE FOOTER — prev / next
+   ============================================================ */
+.article__nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: clamp(4rem, 8vw, 7rem);
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--line);
+  padding-inline: var(--pad);
+}
+.article__nav-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.article__nav-item--next { text-align: right; }
+.article__nav-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.article__nav-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1rem, 1.8vw, 1.35rem);
+  line-height: 1.25;
+  transition: color 0.3s;
+}
+.article__nav-item a:hover .article__nav-title { color: var(--accent); }
+
+@media (max-width: 560px) {
+  .article__nav { grid-template-columns: 1fr; }
+  .article__nav-item--next { text-align: left; }
+}
