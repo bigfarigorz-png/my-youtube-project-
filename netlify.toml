@@ -1,0 +1,16 @@
+# Adonis Co — static site config for Netlify / Cloudflare Pages.
+# No build step: the site is plain HTML/CSS/JS served from the repo root.
+[build]
+  publish = "."
+  command = ""
+
+# Security headers are defined in the _headers file (loaded automatically).
+# This block mirrors the most important ones in case _headers is not used.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=()"
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
