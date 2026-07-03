@@ -352,6 +352,57 @@
     });
   }
 
+  /* ---- Custom cursor ring (fine pointers only) ---- */
+  if (FINE) {
+    var cursor = document.querySelector(".cursor");
+    var cursorRing = cursor ? cursor.querySelector(".cursor__ring") : null;
+    if (cursor && cursorRing) {
+      var mx = 0, my = 0, tx = 0, ty = 0;
+      var cursorState = "";
+
+      document.addEventListener("pointermove", function (e) {
+        mx = e.clientX;
+        my = e.clientY;
+        var el = document.elementFromPoint(mx, my);
+        var newState = "";
+
+        if (!el) return;
+
+        /* Check if over a button */
+        if (el.closest(".btn--amber")) {
+          newState = "hover-btn";
+        }
+        /* Check if over a gallery container */
+        else if (el.closest("[data-lightbox]")) {
+          newState = "hover-gallery";
+        }
+        /* Check if over an image */
+        else if (el.tagName === "IMG") {
+          newState = "hover-image";
+        }
+        /* Check if inside an image container or media element */
+        else if (el.closest("picture") || el.closest(".hero__media") || el.closest(".feature__media") ||
+                 el.closest(".matcard__media") || el.closest(".scard__media") || el.closest(".coll")) {
+          newState = "hover-image";
+        }
+
+        /* Update cursor state class */
+        if (newState !== cursorState) {
+          cursor.classList.remove("cursor--" + cursorState);
+          if (newState) cursor.classList.add("cursor--" + newState);
+          cursorState = newState;
+        }
+      });
+
+      /* Smooth cursor follow with inertia */
+      gsap.ticker.add(function () {
+        tx += (mx - tx) * 0.18;
+        ty += (my - ty) * 0.18;
+        gsap.set(cursor, { x: tx, y: ty });
+      });
+    }
+  }
+
   /* ---- Keep triggers honest after fonts/images settle ---- */
   window.addEventListener("load", function () { ScrollTrigger.refresh(); });
   if (document.fonts && document.fonts.ready) { document.fonts.ready.then(function () { ScrollTrigger.refresh(); }); }
